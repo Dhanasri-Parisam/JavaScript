@@ -55,8 +55,24 @@ let str = "hello";           // String
 let bool = true;             // Boolean
 let undef;                   // Undefined (declared, no value)
 let nul = null;              // Null (intentional absence)
-let sym = Symbol("id");      // Symbol (unique identifier)
+
+let name1 = Symbol("name"); // Symbol (unique identifier)
+let name2 = Symbol("name"); // Another Symbol (different from name1)
+
+let sym = Symbol.for("124");      // Symbol (unique identifier)
+let sym2 = Symbol.for("124"); // Another Symbol (different from sym)
 let bigInt = 9007199254740991n; // BigInt (large integer)
+
+console.log(num);        // 42
+console.log(str);        // "hello"
+console.log(bool);       // true
+console.log(undef);      // undefined
+console.log(nul);        // null
+
+console.log(name1 === name2); // false (different symbols use "for" then true)
+
+console.log(sym === sym2); // true (same symbols)
+console.log(bigInt);     // 9007199254740991n
 
 console.log(typeof num);     // "number"
 console.log(typeof str);     // "string"
