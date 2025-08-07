@@ -220,7 +220,7 @@ console.log("length" in [1, 2, 3]); // true (length property exists in the array
 // instanceof operator
 console.log([] instanceof Array); // true (array is an instance of Array)
 console.log({} instanceof Object); // true (object is an instance of Object)
-console.log("Hello" instanceof String); // false (string literal is not an instance of String)
+console.log("" instanceof String); // false (string literal is not an instance of String)
 console.log(new String("Hello") instanceof String); // true (String object is an instance of String)
 console.log(5 instanceof Number); // false (number literal is not an instance of Number)
 console.log(new Number(5) instanceof Number); // true (Number object is an instance of Number)
@@ -235,3 +235,24 @@ doSomething(this);
 console.log(this["propertynaMe"]); // undefined
 console.log(this.propertynaMe);    // undefined
 doSomethingElse(this);             // Output depends on doSomethingElse
+
+
+console.log("02" > 1);         // true ("02" is coerced to 2, 2 > 1 is true)
+console.log(null === 0);       // false (strict equality, different types)
+console.log(null == 0);        // false (null only loosely equals undefined)
+console.log(null > 0);         // false (null is coerced to 0, 0 > 0 is false)
+console.log(null < 0);         // false (null is coerced to 0, 0 < 0 is false)
+console.log(null >= 0);        // true (null is coerced to 0, 0 >= 0 is true)
+console.log(null <= 0);        // true (null is coerced to 0, 0 <= 0 is true)
+console.log(null != 0);        // true (null only loosely equals undefined)
+console.log(null !== 0);       // true (strict inequality, different types)
+
+console.log(undefined === 0);  // false (strict equality, different types)
+console.log(undefined == 0);   // false (undefined only loosely equals null)
+console.log(undefined > 0);    // false (undefined is coerced to NaN, NaN > 0 is false)
+console.log(undefined < 0);    // false (undefined is coerced to NaN, NaN < 0 is false)
+console.log(undefined >= 0);   // false (undefined is coerced to NaN, NaN >= 0 is false)
+console.log(undefined <= 0);   // false (undefined is coerced to NaN, NaN <= 0 is false)
+console.log(undefined != 0);   // true (undefined only loosely equals null)
+console.log(undefined !== 0);  // true (strict inequality, different
+
