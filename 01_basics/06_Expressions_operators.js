@@ -143,6 +143,9 @@ console.log(str1.concat(" ", str2)); // "Hello World" (concatenate strings)
 console.log(str1.localeCompare(str2)); // -1 (compare strings lexicographically, returns -1 if str1 < str2, 0 if equal, 1 if str1 > str2)
 console.log(str1.repeat(2)); // "HelloHello" (repeat string 2 times)
 
+const String1 = new String("Hello World"); // String object
+console.log(String1); // String { "Hello World" } (String object with value "Hello World")
+console.log(String1.length); // 11 (length of the String object)
 
 //Conditional (ternary) operator
 
