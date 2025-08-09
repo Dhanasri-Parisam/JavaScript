@@ -56,13 +56,22 @@
 // const flat_array = nested_array.flat(Infinity);
 // console.log(flat_array); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
-console.log(Array.isArray("hulk"));
-console.log(Array.from("hulk"));
-console.log(typeof(Array.from("hulk")));
+console.log(Array.isArray("hulk")); // false
+console.log(Array.from("hulk")); // ["h", "u", "l", "k"]
+console.log(typeof(Array.from("hulk"))); // "object"
 
-console.log(Array.from({name : "hulk"}));
+console.log(Array.from({name : "hulk"})); // []
 
 let val1 = 10;
 let val2 = 20;
 let val3 = 30;
-console.log(Array.of(val1,val2,val3));
+console.log(Array.of(val1,val2,val3)); // [10, 20, 30]
+
+// what is destructuring in arrays
+const superheroes = ["thor", "hulk", "spiderman"];
+const [first, second, third] = superheroes;
+console.log(first); // "thor"
+console.log(second); // "hulk"
+console.log(third); // "spiderman"
+console.log(superheroes[0]); // "thor"
+console.table(superheroes); // Displays the array in a table format in the console
