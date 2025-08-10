@@ -1,0 +1,115 @@
+
+<!-- javascript roadmap -->
+<!--
+    JavaScript Basics
+    1. JavaScript Basics & its features
+    2. JavaScript Variables & Constants
+    3. JavaScript Data Types & Structures
+    4. JavaScript Operators & Expressions
+    5. JavaScript Functions & Scope
+    6. JavaScript Control Structures & Loops
+    7. Form Validations
+    8. JavaScript Events & Event Handling
+    9. JavaScript DOM Manipulation & Traversing
+    10. JavaScript Error Handling & Debugging
+    11. JavaScript Debugging Techniques & Tools
+    12. BOM (Browser Object Model)
+
+    Advanced Topics
+
+    1. Prototypes & Inheritance
+    2. callback
+    3. IIFE (Immediately Invoked Function Expression)
+    4. Promises & Async/Await
+    5. AJAX (Asynchronous JavaScript and XML)
+    6. Fetch API
+    7. Closures
+    8. OOPs concepts
+    9. JSON
+-->
+
+<!-- three types to accessing data javascript to document -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Basics</title>
+</head>
+<body>
+    <h1>Welcome to JavaScript Basics</h1>
+    <p id="change">This is a basic HTML template.</p>
+
+    <script type="text/javascript">
+        // 1. Using alert (popup window)
+        alert("javascript basics");
+
+        // 2. Using document.write (writes directly to the document)
+        document.write("this is document write visible in document webpage<br>");
+
+        // 3. Using DOM manipulation (changing HTML content)
+        document.getElementById("change").innerHTML = "this is changed text";
+    </script>
+
+    <!-- how to create variable -->
+    <!-- var let const -->
+    <!-- rules for variables -->
+    <!-- 1. Variable names can contain letters, numbers, underscores, and dollar signs. -->
+    <!-- 2. Variable names must begin with a letter, underscore, or dollar sign. -->
+    <!-- 3. Variable names are case-sensitive. -->
+    <!-- 4. Avoid using reserved keywords as variable names. -->
+    <!-- Developers use camelCase when naming variables in JavaScript. -->
+
+    <script type="text/javascript">
+        // Variable declarations
+        var x = 5; // var keyword
+        let y = 10; // let keyword
+        const z = 15; // const keyword
+
+        // Output variable values
+        document.write("accessing javascript data in webpage<br>");
+        document.write("Value of x: " + x + "<br>");
+        document.write("Value of y: " + y + "<br>");
+        document.write("Value of z: " + z + "<br>");
+
+        // Examples of valid variable names
+        let userName = "Alice"; // camelCase
+        let _score = 100;       // starts with underscore
+        let $amount = 50;       // starts with dollar sign
+        let user2 = "Bob";      // contains number (not at start)
+
+        // Example of case sensitivity
+        let myVar = 1;
+        let MyVar = 2;
+        document.write("myVar: " + myVar + "<br>");
+        document.write("MyVar: " + MyVar + "<br>");
+
+        // Invalid variable names (uncommenting these will cause errors)
+        // let 2user = "Charlie"; // Cannot start with a number
+        // let let = 5;           // Cannot use reserved keywords
+
+        // Demonstrating const: value cannot be changed
+        // z = 20; // Uncommenting this line will cause an error
+
+        // Output valid variable values
+        document.write("userName: " + userName + "<br>");
+        document.write("_score: " + _score + "<br>");
+        document.write("$amount: " + $amount + "<br>");
+        document.write("user2: " + user2 + "<br>");
+
+        //block scope and function scope
+        {
+            let blockScoped = "I am block scoped";
+            document.write(blockScoped + "<br>"); // Accessible here
+        }
+        // console.log(blockScoped); // Uncommenting this will cause an error as blockScoped is not accessible here
+        // function scope using var
+        {
+            var functionScoped = "I am function scoped";
+            document.write(functionScoped + "<br>"); // Accessible here
+        }
+        console.log(functionScoped); // output: I am function scoped
+
+    </script>
+</body>
+</html>

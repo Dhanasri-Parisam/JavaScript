@@ -18,7 +18,7 @@ accountPassword = "9237209"
 accountCity = "Jaipur"
 let accountState;
 
-// Function Scope: Variable exists inside the function only (var).
+// Function Scope: access outside of the function (var).
 
 // Block Scope: Variable exists inside curly braces {} only (let, const).
 
@@ -35,3 +35,15 @@ console.log(x); // Output: 100 (var leaks outside the block)
 console.log(accountId);
 
 console.table([accountId,accountEmail,accountPassword,accountCity]);
+
+// template literals in JavaScript
+const userName = "Dhanu";
+const userAge = 25;
+const userLocation = "India";
+
+const userInfo = `Name: ${userName}, Age: ${userAge}, Location: ${userLocation}`;
+
+console.log(`userAge: ${userAge}
+userLocation: ${userLocation}`);
+
+
