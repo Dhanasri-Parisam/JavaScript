@@ -90,16 +90,16 @@ console.log(2++ + 3); // SyntaxError: Invalid left-hand side in assignment
 console.log(2 + ++3); // SyntaxError: Invalid left-hand side in assignment
 
 // big int operators
-const b1 = 1n; // BigInt literal
-const b2 = 2n; // BigInt literal
-console.log(b1 + b2); // 3n (BigInt addition)
-console.log(b1 - b2); // -1n (BigInt subtraction)
-console.log(b1 * b2); // 2n (BigInt multiplication)
-console.log(b1 / b2); // 0n (BigInt division, result is truncated)
-const a = 1n + 2; // TypeError: Cannot mix BigInt and other types
-console.log(a); // This line will not execute due to the error
-const a = Number(1n) + 2; // 3 (convert BigInt to Number, then add)
-console.log(a); // 3
+const e1 = 1n; // BigInt literal
+const e2 = 2n; // BigInt literal
+console.log(e1 + e2); // 3n (BigInt addition)
+console.log(e1 - e2); // -1n (BigInt subtraction)
+console.log(e1 * e2); // 2n (BigInt multiplication)
+console.log(e1 / e2); // 0n (BigInt division, result is truncated)
+const result1 = 1n + 2; // TypeError: Cannot mix BigInt and other types
+console.log(result1); // This line will not execute due to the error
+const sum = Number(1n) + 2; // 3 (convert BigInt to Number, then add)
+console.log(sum); // 3
 
 const b = 1n + BigInt(2); // 3n (convert Number to BigInt, then add)
 console.log(b); // 3n

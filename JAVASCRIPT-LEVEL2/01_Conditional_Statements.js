@@ -139,3 +139,26 @@ Other conditional statement concepts you might explore:
 
 These cover most practical uses of conditional statements in JavaScript.
 */
+
+
+// calculate the operation using switch
+let input1 = +prompt("Enter a number1:");
+let input2 = +prompt("Enter a number2:");
+let operation = prompt("enter the operation (+, -, *, /):");
+
+switch (operation) {
+    case "+":
+        alert("sum of two numbers" + (input1 + input2));
+        break;
+    case "-":
+        alert("difference of two numbers" + (input1 - input2));
+        break;
+    case "*":
+        alert("product of two numbers" + (input1 * input2));
+        break;
+    case "/":
+        alert("quotient of two numbers" + (input1 / input2));
+        break;
+    default:
+        alert("Invalid operation");
+}

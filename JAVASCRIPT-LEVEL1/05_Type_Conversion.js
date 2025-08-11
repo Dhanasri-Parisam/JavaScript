@@ -29,7 +29,7 @@ console.log("2" + 2 + "1"); // "221" (string concatenation)
 console.log(typeof("2" + 2 + "1")); // "string" (result is a string due to concatenation)
 console.log(1 + 2 + "3"); // "33" (string concatenation)
 
-console.log((2 + 2) * 5 % 6 * 5); // 0 (order of operations: addition, multiplication, modulus)
+console.log((2 + 2) * 5 % 6 * 5); // 10 (order of operations: addition, multiplication, modulus)
 
 console.log(+true); // 1 (true to number)
 console.log(+false); // 0 (false to number)
@@ -47,6 +47,7 @@ console.log(-null); // 0 (null negated)
 console.log(-undefined); // NaN (undefined negated)
 console.log(-"123abc"); // NaN (cannot negate non-numeric string)
 console.log(-"123.45"); // -123.45 (negation of numeric string)
+console.log(-"0X1A"); // -26 (negation of hexadecimal string)
 
 let gameCounter = 100;
 gameCounter += 1; // Increment

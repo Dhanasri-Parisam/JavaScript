@@ -50,6 +50,33 @@ do {
     num++;
 } while (num <= 5);
 
+
+// DIFFERENCE BTW (FOR OF and FOR IN)
+// for...in "iterates over the enumerable property keys of an object" (or array indices)
+// for...of "iterates over the values" of an iterable object (like arrays, strings, maps, sets)
+
+const arr2 = ['x', 'y', 'z'];
+
+console.log('Using for...in:');
+for (const index in arr2) {
+    console.log(index); // outputs: 0, 1, 2 (array indices)
+}
+
+console.log('Using for...of:');
+for (const value of arr2) {
+    console.log(value); // outputs: x, y, z (array values)
+}
+
+const obj2 = { a: 1, b: 2 };
+console.log('for...in with object:');
+for (const key in obj2) {
+    console.log(key); // outputs: a, b (object keys)
+}
+
+// for...of cannot be used directly on objects (not iterable)
+// for (const value of obj2) { ... } // This would throw an error
+
+
 // Example: for...of loop (iterate over array)
 const arr = ["apple", "banana", "cherry"];
 for (const fruit of arr) {
@@ -61,6 +88,10 @@ for (const fruit of arr) {
     console.log(arr.pop()); // output: cherry (removes last element)
 }
 
+const fruitsarr = ["mango", "apple", "orange", "banana"];
+for (const i in fruitsarr){
+    console.log(fruitsarr[i]); // output: mango, apple, orange, banana (each fruit on a new line)
+}
 
 // Example: for...of loop (iterate over string)
 let str = "Hello";
@@ -78,6 +109,8 @@ const map = new Map([
     ['b', 2],
     ['c', 3]
 ]);
+console.log(map); // output: Map(3) { 'a' => 1, 'b' => 2, 'c' => 3 }
+
 for (const [key, value] of map) {
     console.log(`${key}: ${value}`); // output: a: 1, b: 2, c: 3
 }
