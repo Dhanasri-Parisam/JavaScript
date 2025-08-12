@@ -1,4 +1,3 @@
-/*
 
 console.log("All about functions in js")
 
@@ -22,10 +21,10 @@ console.log(multiply(5, 10)); // Output: 50
 
 
 // default parameter
-const sum = function (a, b, c = 10) {
+const addition = function (a, b, c = 10) {
     return a + b + c;
 }
-let res = sum(10, 2) // Output: 16
+let res = addition(10, 2) // Output: 16
 console.log(res); // output: 16
 
 //subtract using functions
@@ -70,7 +69,7 @@ const outerFunction = () => {
 }
 outerFunction();
 
-*/
+
 /*
 
 // faulty calculator generator
@@ -133,3 +132,23 @@ console.log("output of operation --->> "+ c)
 console.log("output of operation --->> "+ d)
 console.log("output of operation --->> "+ p)
 console.log("output of operation --->> "+ q)
+
+
+
+// you not return anything output will be undefined
+
+function welcome(message) {
+    console.log(message);
+}
+
+let output = welcome("hello");
+console.log(output); // Output: undefined
+
+// variable assigning functions
+
+functions = function marvel(){
+    return "Marvel is a great universe!";
+}
+
+let marvelOutput = functions();
+console.log(marvelOutput); // Output: Marvel is a great universe!
