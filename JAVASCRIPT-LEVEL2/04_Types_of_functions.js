@@ -1,98 +1,116 @@
-console.log("Types of functions in javascript");
+console.log("Types of Functions in JavaScript");
 
-// Anonymus function in JS
-// Anonymus function can access directly the variables from the outer scope.
-// It is not recommended to use Anonymus functions in production code.
-// Anonymus functions are often used as callbacks or in event handlers.
-// They are defined without a name and can be executed immediately or assigned to a variable.
-// Example of an Anonymus function
-(function (a, b) {
-    console.log(a + b);
-}(5, 10)); // Output: 15
+// ====================================================
+// 1. ANONYMOUS FUNCTIONS
+// ====================================================
+// Definition:
+// An Anonymous Function is a function without a name.
+// It can be assigned to a variable or used as a callback.
+// It does NOT run immediately unless explicitly called.
+// ====================================================
 
-const access = function(a,b){
-    if(a > b){
+// Example 1: Anonymous function assigned to a variable
+const compare = function(a, b) {
+    if (a > b) {
         return "a is greater";
-    }
-    else{
+    } else {
         return "b is greater";
     }
-}
+};
 
-let accessing = access(10,20);
-console.log(accessing);
-
-const Printnames = (function(name){
-    return `hello you are learning ${name}`;
-})("JAVASCRIPT");
-
-console.log(Printnames);
+// Calling the anonymous function
+let result = compare(10, 20);
+console.log(result); // Output: b is greater
 
 
-// IIFE THEORY
-// IIFE (Immediately Invoked Function Expression) is a function that runs as soon as it is defined.
-// It is a design pattern that helps to create a private scope for variables and functions.
-// IIFE is often used to avoid polluting the global scope and to create a module-like structure.
-// Example of an IIFE
+// Example 2: Anonymous function used immediately (looks like IIFE but technically still anonymous)
+const greeting = (function(name) {
+    return `Hello, you are learning ${name}`;
+})("JavaScript");
 
-//IIFE without parameters
-(function () {
+console.log(greeting); // Output: Hello, you are learning JavaScript
+
+
+
+// ====================================================
+// 2. IIFE (Immediately Invoked Function Expression)
+// ====================================================
+// Definition:
+// IIFE is a function that is defined and executed immediately.
+// It is wrapped in parentheses to make it an expression,
+// and followed by () to execute it right away.
+// Purpose:
+//  - Avoid polluting the global scope
+//  - Create a private scope
+// ====================================================
+
+// Example 1: IIFE without parameters
+(function() {
     const message = "This is an IIFE";
     console.log(message);
 })();
 
-// IIFE with parameters
-(function (name) {
+// Example 2: IIFE with parameters
+(function(name) {
     console.log(`Hello, ${name}!`);
 })("Dhanu");
 
-// IIFE with return value
-const withreturn = (function (a, b) {
+// Example 3: IIFE with a return value
+const sum = (function(a, b) {
     return a + b;
 })(5, 10);
-console.log(withreturn); // Output: 15
+console.log(sum); // Output: 15
 
-// IIFE without return value
-(function () {
+// Example 4: IIFE without return value
+(function() {
     console.log("This IIFE does not return a value.");
 })();
 
 
-// cover the 4 cases 
-// Function with no arguments and no return value
-(function () {
-    console.log("This IIFE has no parameters and does not return a value.");
+
+// ====================================================
+// 3. COVERING THE 4 MAIN IIFE CASES
+// ====================================================
+
+// Case 1: No arguments, no return value
+(function() {
+    console.log("IIFE: no parameters, no return value.");
 })();
 
-// Function with no arguments and a return value
-const noArgsWithReturn = (function () {
-    return "This IIFE has no parameters but returns a value.";
+// Case 2: No arguments, with return value
+const noArgsReturn = (function() {
+    return "IIFE: no parameters, returns a value.";
 })();
-console.log(noArgsWithReturn); // output: This IIFE has no parameters but returns a value.
+console.log(noArgsReturn);
 
-// Function with arguments and no return value
-(function (name) {
-    console.log(`Hello, ${name}!`);
+// Case 3: Arguments, no return value
+(function(name) {
+    console.log(`IIFE: Hello, ${name}! (no return value)`);
 })("Dhanu");
 
-// Function with arguments and with return value
-const argsWithReturn = (function (a, b) {
+// Case 4: Arguments, with return value
+const argsReturn = (function(a, b) {
     return a + b;
 })(5, 10);
-console.log(argsWithReturn); // Output: 15
+console.log(argsReturn); // Output: 15
 
-// Anonymous IIFE
-// This IIFE does not have a name and is used for quick, throwaway logic.
-(function (a, b) {
-    console.log(a + b); // Output: 15
+
+
+// ====================================================
+// 4. ANONYMOUS IIFE vs NAMED IIFE
+// ====================================================
+
+// Anonymous IIFE — no name, used for quick execution
+(function(a, b) {
+    console.log("Anonymous IIFE Sum:", a + b);
 })(5, 10);
 
-// Named IIFE
-// This IIFE has a name ('sum') which helps in debugging and allows recursion inside the function.
-// The name 'sum' is not accessible outside the IIFE's scope.
-(function sum(a, b) {
-    console.log(a + b); // Output: 15
+// Named IIFE — has a name for debugging or recursion
+// The name is NOT available outside the function scope
+(function sumIIFE(a, b) {
+    console.log("Named IIFE Sum:", a + b);
 })(5, 10);
+
 
 
 // Arrow functions in Javascript
