@@ -88,6 +88,18 @@ for (const fruit of arr) {
     console.log(arr.pop()); // output: cherry (removes last element)
 }
 
+// nested loop in for of
+const avengers = ["spiderman", "thor", "ironman", ["hulk","captain america","black widow"]];
+for (const hero of avengers) {
+    console.log(hero); // output: spiderman, thor, ironman, ["hulk","captain america","black widow"]    
+
+    if (Array.isArray(hero)) {
+        for (const name of hero) {
+            console.log(name); // output: hulk, captain america, black widow
+        }
+    }
+}
+
 const fruitsarr = ["mango", "apple", "orange", "banana"];
 for (const i in fruitsarr){
     console.log(fruitsarr[i]); // output: mango, apple, orange, banana (each fruit on a new line)
@@ -126,4 +138,24 @@ for (let i = 1; i <= 10; i++) {
     if (i === 5) continue; // skip 5
     if (i === 8) break;    // stop at 8
     console.log(i);
+}
+
+
+//guess Favorite movie
+
+let favoriteMovie = "Inception";
+let guess;
+
+while (true) {
+    guess = prompt("Guess the movie (type 'quit' to exit):");
+    if (guess === "quit") {
+        console.log("You quit the game!");
+        break;
+    }
+    if (guess === favoriteMovie) {
+        console.log("Correct! Your favorite movie is " + favoriteMovie);
+        break;
+    } else {
+        console.log("Wrong guess! Try again.");
+    }
 }
