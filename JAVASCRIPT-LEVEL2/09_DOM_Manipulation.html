@@ -1,0 +1,92 @@
+<!-- DOM (Document Object Model) in JavaScript
+
+When a web page loads, the browser creates a tree-like structure of the HTML called the DOM.
+
+Each HTML element is a node in this tree, with parent and child relationships.
+
+The root of this tree is the document.
+
+Using JavaScript, we can access, change, remove, or create elements anywhere in the DOM.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Manipulation</title>
+</head>
+<body>
+    <h1 id = "first">Dom Manipulation getElementById</h1>
+    <div class = "second">Dom Manipulation getElementByClassName</div>
+    <p id = "id1">this is paragraph tag with id-1</p>
+    <p id = "id2">this is paragraph tag with id-2</p>
+    <script>
+        /* document.getElementById*/
+        let id = document.getElementById("first");
+        console.log(id); // output: <h1 id="first">Dom Manipulation heading</h1>
+        // console.log(an); // output: undefined (because 'an' is not defined)
+
+        /* document.getElementByClass*/
+        let className = document.getElementsByClassName("second");
+        console.log(className); // output: HTMLCollection(1) [h2.second]
+        // expand div imp tags are
+        // innerHTML: "Dom Manipulation getElementByClassName"
+        // innerText: "Dom Manipulation getElementByClassName"
+
+        /* document.getElementByTagname*/
+        let tagName = document.getElementsByTagName("div");
+        console.log(tagName); // output: HTMLCollection(1) [div.second]
+
+        /* document.querySelector(. / # / tagname) */
+        let querySelector = document.querySelector(".second");
+        console.log(querySelector); // output: <div class="second">Dom Manipulation getElementByClassName</div>
+
+        /* document.querySelectorAll*/
+        let id1 = document.querySelectorAll("#id1,#id2");
+        console.log(id1);
+    </script>
+</body>
+</html>
+
+
+<!-- DOM PROPERTIES TO SELECT HTML ELEMENTS -->
+ <!-- document.body
+      document.head
+      document.title
+      document.anchors
+      document.forms
+      document.images
+      document.scripts -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Properties</title>
+</head>
+<body>
+    <h1>DOM Properties to Select HTML Elements</h1>
+    <ul>
+        <li><strong>document.body</strong>: <span id="body-demo"></span></li>
+        <li><strong>document.head</strong>: <span id="head-demo"></span></li>
+        <li><strong>document.title</strong>: <span id="title-demo"></span></li>
+        <li><strong>document.anchors</strong>: <span id="anchors-demo"></span></li>
+        <li><strong>document.forms</strong>: <span id="forms-demo"></span></li>
+        <li><strong>document.images</strong>: <span id="images-demo"></span></li>
+        <li><strong>document.scripts</strong>: <span id="scripts-demo"></span></li>
+    </ul>
+    <a name="anchor1" href="#">Anchor 1</a>
+    <form id="form1"><input type="text" name="input1"></form>
+    <img src="https://via.placeholder.com/50" alt="Sample Image">
+    <script>
+        document.getElementById('body-demo').textContent = document.body ? "Exists" : "Not found";
+        document.getElementById('head-demo').textContent = document.head ? "Exists" : "Not found";
+        document.getElementById('title-demo').textContent = document.title;
+        document.getElementById('anchors-demo').textContent = document.anchors.length;
+        document.getElementById('forms-demo').textContent = document.forms.length;
+        document.getElementById('images-demo').textContent = document.images.length;
+        document.getElementById('scripts-demo').textContent = document.scripts.length;
+    </script>
+</body>
+</html>
