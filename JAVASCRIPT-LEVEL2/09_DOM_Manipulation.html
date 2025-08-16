@@ -43,50 +43,88 @@ Using JavaScript, we can access, change, remove, or create elements anywhere in 
 
         /* document.querySelectorAll*/
         let id1 = document.querySelectorAll("#id1,#id2");
-        console.log(id1);
+        console.log(id1); //output: NodeList(2) [p#id1, p#id2]
     </script>
 </body>
 </html>
 
 
 <!-- DOM PROPERTIES TO SELECT HTML ELEMENTS -->
- <!-- document.body
-      document.head
-      document.title
-      document.anchors
-      document.forms
-      document.images
-      document.scripts -->
+<!-- document.body → <body> content
+
+document.head → <head> content
+
+document.title → <title> text
+
+document.anchors → <a> with name attribute
+
+document.forms → All <form> elements
+
+document.images → All <img> elements
+
+document.scripts → All <script> elements -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Properties</title>
+  <meta charset="UTF-8">
+  <meta name="author" content="Default Author">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Object Demo</title>
 </head>
 <body>
-    <h1>DOM Properties to Select HTML Elements</h1>
-    <ul>
-        <li><strong>document.body</strong>: <span id="body-demo"></span></li>
-        <li><strong>document.head</strong>: <span id="head-demo"></span></li>
-        <li><strong>document.title</strong>: <span id="title-demo"></span></li>
-        <li><strong>document.anchors</strong>: <span id="anchors-demo"></span></li>
-        <li><strong>document.forms</strong>: <span id="forms-demo"></span></li>
-        <li><strong>document.images</strong>: <span id="images-demo"></span></li>
-        <li><strong>document.scripts</strong>: <span id="scripts-demo"></span></li>
-    </ul>
-    <a name="anchor1" href="#">Anchor 1</a>
-    <form id="form1"><input type="text" name="input1"></form>
-    <img src="https://via.placeholder.com/50" alt="Sample Image">
-    <script>
-        document.getElementById('body-demo').textContent = document.body ? "Exists" : "Not found";
-        document.getElementById('head-demo').textContent = document.head ? "Exists" : "Not found";
-        document.getElementById('title-demo').textContent = document.title;
-        document.getElementById('anchors-demo').textContent = document.anchors.length;
-        document.getElementById('forms-demo').textContent = document.forms.length;
-        document.getElementById('images-demo').textContent = document.images.length;
-        document.getElementById('scripts-demo').textContent = document.scripts.length;
-    </script>
+  <h1>Document Object Practice</h1>
+
+  <!-- Anchors -->
+  <a name="section1">Section 1 (Anchor)</a><br>
+  <a href="https://example.com" target="_blank">Go to Example.com</a>
+  <hr>
+
+  <!-- Form -->
+  <form name="loginForm">
+    <label>Username: <input type="text" name="username"></label>
+    <input type="submit" value="Login">
+  </form>
+  <hr>
+
+  <!-- Images -->
+  <img src="pic1.jpg" alt="Picture 1">
+  <img src="pic2.jpg" alt="Picture 2">
+  <hr>
+
+  <!-- External JS (main.js file assumed if you want extra scripts) -->
+  <script src="main.js"></script>
+
+  <!-- Inline Script -->
+  <script>
+    // === Document Body ===
+    console.log("Body:", document.body);
+    document.body.style.backgroundColor = "lightblue"; // Change background color
+
+    // === Document Head ===
+    console.log("Head:", document.head);
+    // Add meta tag dynamically:
+    document.head.innerHTML += '<meta name="author" content="Dhanush">';
+    
+    console.log("Page Title (Before):", document.title);
+    document.title = "New Page Title"; // Change title
+    console.log("Page Title (After):", document.title);
+
+    // === Document Anchors ===
+    console.log("Anchors:", document.anchors); // Only anchors with name attribute
+
+    // === Document Forms ===
+    console.log("First Form:", document.forms[0]); // Access first form
+    console.log("Form by name:", document.forms["loginForm"]); // Access form by name
+
+    // === Document Images ===
+    console.log("Number of Images:", document.images.length);
+    document.images.src = "newpic.jpg"; // Change first image src
+
+    // === Document Scripts ===
+    console.log("Scripts on Page:", document.scripts); // Logs all <script> tags
+  </script>
 </body>
 </html>
+
+
