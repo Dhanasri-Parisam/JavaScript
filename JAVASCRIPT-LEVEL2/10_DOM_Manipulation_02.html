@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation-2</title>
+</head>
+<body>
+    <div id="first">
+        <p>
+            This is a paragraph inside1 a div with id "first".
+        </p>
+        <p id="before">
+            This is a paragraph2 inside a div with id "first".
+        </p>
+    </div>
+
+    <div id="second">
+        <p>
+            This is a paragraph inside a div with id "second".
+        </p>
+        <p>
+            This is a paragraph2 inside a div with id "second".
+        </p>
+    </div>
+
+    <script>
+        // 1. Create element
+        var n = document.createElement('p');
+        n.innerText = "This is third paragraph in div2";
+
+        // 2. Append element
+        var parent = document.getElementById("second");
+        parent.appendChild(n);
+
+        console.log("Second Div after append:");
+        console.log(parent.innerHTML);
+
+        // 3. Insert element before another
+        var newtext = document.createElement('p');
+        newtext.innerText = "This is heading inserted before 'before' paragraph";
+        
+        var firstDiv = document.getElementById("first");
+        var before = document.getElementById("before"); 
+        firstDiv.insertBefore(newtext, before);
+
+        console.log("First Div after insertBefore:");
+        console.log(firstDiv.innerHTML);
+
+        // 4. Remove element using remove()
+        var removeEl = document.getElementById("before");
+        removeEl.remove(); 
+
+        console.log("First Div after remove():");
+        console.log(firstDiv.innerHTML);
+
+        // 5. Remove child element using removeChild()
+        var removeChildExample = document.createElement('p');
+        removeChildExample.innerText = "I will be removed with removeChild()";
+        firstDiv.appendChild(removeChildExample);
+
+        firstDiv.removeChild(removeChildExample);
+
+        console.log("First Div after removeChild():");
+        console.log(firstDiv.innerHTML);
+
+        // 6. Replace element using replaceChild()
+        var oldPara = firstDiv.querySelector("p"); // first paragraph inside div
+        var newPara = document.createElement('p');
+        newPara.innerText = "This paragraph replaced the old one.";
+        firstDiv.replaceChild(newPara, oldPara);
+
+        console.log("First Div after replaceChild():");
+        console.log(firstDiv.innerHTML);
+    </script>
+</body>
+</html>
