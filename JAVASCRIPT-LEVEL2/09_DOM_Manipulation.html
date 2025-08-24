@@ -1,130 +1,111 @@
-<!-- DOM (Document Object Model) in JavaScript
 
-When a web page loads, the browser creates a tree-like structure of the HTML called the DOM.
+<!-- 📒 DOM Manipulation Notes
+1. Selecting Elements
 
-Each HTML element is a node in this tree, with parent and child relationships.
+By ID → Used to select a single element with a unique identifier.
 
-The root of this tree is the document.
+By Class → Selects all elements with a specific class name (returns an HTMLCollection).
 
-Using JavaScript, we can access, change, remove, or create elements anywhere in the DOM.-->
+By Tag Name → Selects all elements of a given tag (returns an HTMLCollection).
+
+By Query Selector → Selects the first element that matches a CSS selector.
+
+By Query Selector All → Selects all elements that match a CSS selector (returns a NodeList).
+
+2. Modifying Elements
+
+Change Content → You can modify the text or HTML inside an element.
+
+Change Style → You can update the CSS styles (like color, font size, etc.) of an element.
+
+3. DOM Properties
+
+document → Represents the whole HTML document.
+
+head → Refers to the <head> section of the HTML.
+
+body → Refers to the <body> section of the HTML.
+
+title → Shows the title of the webpage.
+
+URL → Displays the current page URL.
+
+characterSet → Defines the character encoding (like UTF-8).
+
+images → Collection of all image elements in the document.
+
+forms → Collection of all form elements in the document.
+
+4. Key Differences
+
+HTMLCollection → Returned by getElementsByClassName and getElementsByTagName. It is live, meaning it updates automatically if the document changes.
+
+NodeList → Returned by querySelectorAll. It is static, meaning it does not update automatically. -->
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dom Manipulation</title>
+    <title>DOM Manipulation</title>
 </head>
 <body>
-    <h1 id = "first">Dom Manipulation getElementById</h1>
-    <div class = "second">Dom Manipulation getElementByClassName</div>
-    <p id = "id1">this is paragraph tag with id-1</p>
-    <p id = "id2">this is paragraph tag with id-2</p>
+    <div>
+        <h1 id = "firstheading">this is first heading tag</h1>
+        <h2 id="secondheading">this is second heading tag</h2>
+        <p id="firstpara">this is a paragraph</p>
+
+        <h3 class="classheading">this is class heading</h3>
+        <p class="classpara1">this is class paragraph</p>
+        <p class="classpara1">this is another class paragraph</p>
+    </div>
+
     <script>
-        /* document.getElementById*/
-        let id = document.getElementById("first");
-        console.log(id); // output: <h1 id="first">Dom Manipulation heading</h1>
-        // console.log(an); // output: undefined (because 'an' is not defined)
+        // Log the element with id "firstheading" to the console using getElementById
+        console.log(document.getElementById("firstheading")); 
 
-        /* document.getElementByClass*/
-        let className = document.getElementsByClassName("second");
-        console.log(className); // output: HTMLCollection(1) [h2.second]
-        // expand div imp tags are
-        // innerHTML: "Dom Manipulation getElementByClassName"
-        // innerText: "Dom Manipulation getElementByClassName"
+        // Change the inner HTML (content) of the element to new text
+        document.getElementById("firstheading").innerHTML = "this is modified text by using innerHtml"; // modification by using innerHTML
 
-        /* document.getElementByTagname*/
-        let tagName = document.getElementsByTagName("div");
-        console.log(tagName); // output: HTMLCollection(1) [div.second]
+        // Change the text color of the element to red
+        document.getElementById("firstheading").style.color = "red";
 
-        /* document.querySelector(. / # / tagname) */
-        let querySelector = document.querySelector(".second");
-        console.log(querySelector); // output: <div class="second">Dom Manipulation getElementByClassName</div>
+        // Log all elements with the class name "heading" to the console
+        console.log(document.getElementsByClassName("classheading")); // using getElementsByClassName // returns HTMLCollection
+        document.getElementsByClassName("classheading")[0].style.color = "blue"; // modifying the first element in the HTMLCollection
+        document.getElementsByClassName("classheading")[0].innerHTML = "this is modified text by using innerHtml for class";  
 
-        /* document.querySelectorAll*/
-        let id1 = document.querySelectorAll("#id1,#id2");
-        console.log(id1); //output: NodeList(2) [p#id1, p#id2]
+
+        // log all elements with the tagname "p" to the console
+        console.log(document.getElementsByTagName("p")); // using getElementsByTagName // returns HTMLCollection
+        document.getElementsByTagName("p")[0].style.color = "green"; // modifying the first element in the HTMLCollection
+        document.getElementsByTagName("p")[0].innerHTML = "this is modified text by using innerHtml for tagname";
+
+        //log all elements with the querySelector
+        // same class name for multiple tags it will return the first class name 
+        console.log(document.querySelector(".classpara1")); // using querySelector // returns the first element
+        document.querySelector(".classpara1").style.color = "purple"; // modifying the first element
+        document.querySelector(".classpara1").innerHTML = "this is modified text by using innerHtml for querySelector";
+
+        // log all elements with the querySelectorAll
+        console.log(document.querySelectorAll(".classpara1")); // using querySelectorAll // returns NodeList
+        document.querySelectorAll(".classpara1")[0].style.color = "orange"; // modifying the first (and only) element in the NodeList
+        document.querySelectorAll(".classpara1")[0].innerHTML = "this is modified text by using innerHtml for querySelectorAll";
+
+
+        // DOM properties to select html element
+        console.log(document);
+        console.log(document.head); // head element
+        console.log(document.body); // body element
+        console.log(document.innerHTML); // entire HTML content
+        console.log(document.title); // title of the document
+        console.log(document.URL); // URL of the document
+        console.log(document.characterSet); // character set of the document
+        console.log(document.images); // returns HTMLCollection of images
+        console.log(document.forms); // returns HTMLCollection of forms
+
+
     </script>
 </body>
 </html>
-
-
-<!-- DOM PROPERTIES TO SELECT HTML ELEMENTS -->
-<!-- document.body → <body> content
-
-document.head → <head> content
-
-document.title → <title> text
-
-document.anchors → <a> with name attribute
-
-document.forms → All <form> elements
-
-document.images → All <img> elements
-
-document.scripts → All <script> elements -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="author" content="Default Author">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document Object Demo</title>
-</head>
-<body>
-  <h1>Document Object Practice</h1>
-
-  <!-- Anchors -->
-  <a name="section1">Section 1 (Anchor)</a><br>
-  <a href="https://example.com" target="_blank">Go to Example.com</a>
-  <hr>
-
-  <!-- Form -->
-  <form name="loginForm">
-    <label>Username: <input type="text" name="username"></label>
-    <input type="submit" value="Login">
-  </form>
-  <hr>
-
-  <!-- Images -->
-  <img src="pic1.jpg" alt="Picture 1">
-  <img src="pic2.jpg" alt="Picture 2">
-  <hr>
-
-  <!-- External JS (main.js file assumed if you want extra scripts) -->
-  <script src="main.js"></script>
-
-  <!-- Inline Script -->
-  <script>
-    // === Document Body ===
-    console.log("Body:", document.body);
-    document.body.style.backgroundColor = "lightblue"; // Change background color
-
-    // === Document Head ===
-    console.log("Head:", document.head);
-    // Add meta tag dynamically:
-    document.head.innerHTML += '<meta name="author" content="Dhanush">';
-    
-    console.log("Page Title (Before):", document.title);
-    document.title = "New Page Title"; // Change title
-    console.log("Page Title (After):", document.title);
-
-    // === Document Anchors ===
-    console.log("Anchors:", document.anchors); // Only anchors with name attribute
-
-    // === Document Forms ===
-    console.log("First Form:", document.forms[0]); // Access first form
-    console.log("Form by name:", document.forms["loginForm"]); // Access form by name
-
-    // === Document Images ===
-    console.log("Number of Images:", document.images.length);
-    document.images.src = "newpic.jpg"; // Change first image src
-
-    // === Document Scripts ===
-    console.log("Scripts on Page:", document.scripts); // Logs all <script> tags
-  </script>
-</body>
-</html>
-
-

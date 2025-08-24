@@ -1,14 +1,27 @@
+
+<!-- 📒 DOM Manipulation Important topics 
+
+    1. how to create HTML element
+    2. how to set content to element
+    3. how to append the new element
+    4. how to insert element before another element
+    5. how to remove an element
+    6. how to remove child element
+    7. how to replace an element
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Manipulation-2</title>
+    <title>DOM operations</title>
 </head>
 <body>
     <div id="first">
         <p>
-            This is a paragraph1 inside a div with id "first".
+            This is a paragraph inside1 a div with id "first".
         </p>
         <p id="before">
             This is a paragraph2 inside a div with id "first".
@@ -16,62 +29,64 @@
     </div>
 
     <div id="second">
-        <p>
-            This is a paragraph inside a div with id "second".
-        </p>
-        <p>
-            This is a paragraph2 inside a div with id "second".
-        </p>
+        <h1 id = "div2h1">this is heading in second div</h1>
+        <p id="div2p1">this is paragraph1 in second div</p>
+        <p id="div2p2">this is paragraph2 in second div</p>
     </div>
 
     <script>
-        // 1. Create element
-        var n = document.createElement('p');
-        n.innerText = "This is third paragraph in div2";
+        console.log(document.body);
 
-        // 2. Append element
-        var parent = document.getElementById("second");
-        parent.appendChild(n);
+        // Step 1: Create a new <p> element
+        let addingNewElement = document.createElement("p");
 
-        console.log("Second Div after append:");
-        console.log(parent.innerHTML);
+        // Step 2: Set the content of the new <p> element
+        addingNewElement.innerHTML = "Append : i am p tag added by using createElement and innerText";
 
-        // 3. Insert element before another
-        var newtext = document.createElement('p');
-        newtext.innerText = "This is heading inserted before 'before' paragraph";
+        // Step 3: Access the parent element (the div with id="second")
+        let accessSecondDiv = document.getElementById("second");
+
+        // Step 4: Append the new <p> element as a child to the parent div
+        accessSecondDiv.append(addingNewElement);
+
+        // What actually happens:
+        // - A new <p> element is created in memory.
+        // - Its inner HTML is set to the given string.
+        // - The script finds the <div> with id="second" in the DOM.
+        // - The new <p> element is appended as the last child of that div, so it appears after the existing paragraphs inside the "second" div.
+
+
+        // difference between innerHTML and innerText
+        console.log(accessSecondDiv.innerText); // "this is paragraph1 in second div\nthis is paragraph2 in second div\nAppend : i am p tag added by using createElement and innerText"
+        console.log(accessSecondDiv.innerHTML); // "<p>this is paragraph1 in second div</p>\n<p>this is paragraph2 in second div</p>\n<p>Append : i am p tag added by using createElement and innerHTML</p>"
+
+
+        // how to insert element before another element
+        let newElement = document.createElement("p");
+        newElement.innerHTML = "this is a new paragraph added before the existing ones";
+        accessSecondDiv.insertBefore(newElement, document.getElementById("div2p2"));
+
+        //how to remove element
+        let removElementh1 = document.getElementById("div2h1");
+        removElementh1.remove();
+
+        // how to remove child
+        let removElement = document.getElementById("div2h5");
+        if (removElement) {
+            accessSecondDiv.removeChild(removElement);
+        } else {
+            console.error('Child element with id "div2h1" not found.');
+        }
+
+
+        // how to replace element
+        let replaceElement = document.createElement("h2");
+        replaceElement.innerHTML = "this is a new heading replacing the old one";
+        accessSecondDiv.replaceChild(replaceElement, document.getElementById("div2p1"));
+
         
-        var firstDiv = document.getElementById("first");
-        var before = document.getElementById("before"); 
-        firstDiv.insertBefore(newtext, before);
-
-        console.log("First Div after insertBefore:");
-        console.log(firstDiv.innerHTML);
-
-        // 4. Remove element using remove()
-        var removeEl = document.getElementById("before");
-        removeEl.remove(); 
-
-        console.log("First Div after remove():");
-        console.log(firstDiv.innerHTML);
-
-        // 5. Remove child element using removeChild()
-        var removeChildExample = document.createElement('p');
-        removeChildExample.innerText = "I will be removed with removeChild()";
-        firstDiv.appendChild(removeChildExample);
-
-        firstDiv.removeChild(removeChildExample);
-
-        console.log("First Div after removeChild():");
-        console.log(firstDiv.innerHTML);
-
-        // 6. Replace element using replaceChild()
-        var oldPara = firstDiv.querySelector("p"); // first paragraph inside div
-        var newPara = document.createElement('p');
-        newPara.innerText = "This paragraph replaced the old one.";
-        firstDiv.replaceChild(newPara, oldPara);
-
-        console.log("First Div after replaceChild():");
-        console.log(firstDiv.innerHTML);
+        
     </script>
+
 </body>
 </html>
