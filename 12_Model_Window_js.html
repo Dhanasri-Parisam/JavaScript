@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Windows in JavaScript</title>
+</head>
+<body>
+  <h1>JavaScript Model Windows Example</h1>
+
+  <script>
+    /***********************************************************
+     * 📘 JavaScript Model Windows (Dialog Boxes)
+     * ---------------------------------------------------------
+     * JavaScript provides 3 types of built-in dialog boxes:
+     * 1. alert()   → Shows a message (Notification)
+     * 2. prompt()  → Takes input from user
+     * 3. confirm() → Asks for confirmation (Yes/No)
+     * 
+     * ⚠ Note: All of these are modal windows
+     * → Execution stops until the user responds.
+     ***********************************************************/
+
+    /**********************
+     * 1️⃣ alert()
+     * --------------------
+     * - Displays a message to the user.
+     * - Only has "OK" button.
+     * - Used for notifications or warnings.
+     **********************/
+    alert("Welcome! This is an alert message.");  
+    // Output: A popup with message + OK button
+    // Return value: undefined
+
+
+    /**********************
+     * 2️⃣ prompt()
+     * --------------------
+     * - Displays a message asking for user input.
+     * - Has "OK" and "Cancel" buttons.
+     * - Returns:
+     *    → User input as STRING if "OK" clicked
+     *    → null if "Cancel" clicked
+     **********************/
+    let name = prompt("Enter your name:");  
+    // Example: if user enters "Dhanush", then name = "Dhanush"
+    // By default → typeof name = string
+    alert("Hello " + name); // Displays greeting with user input
+
+    // If we need a number:
+    let age = Number(prompt("Enter your age:"));
+    console.log("Age:", age, "Type:", typeof age);
+    // Example: user enters 20 → Output: Age: 20 Type: number
+
+
+    /**********************
+     * 3️⃣ confirm()
+     * --------------------
+     * - Displays a message asking for confirmation.
+     * - Has "OK" and "Cancel" buttons.
+     * - Returns:
+     *    → true  if "OK" clicked
+     *    → false if "Cancel" clicked
+     **********************/
+    let isDelete = confirm("Are you sure you want to delete?");
+    if (isDelete) {
+      console.log("✅ Successfully deleted");
+    } else {
+      console.log("❌ Not deleted");
+    }
+
+
+    /**********************
+     * 📝 Summary Table
+     * ---------------------------------------------------------
+     * | Function   | Purpose                 | Buttons | Return Value    |
+     * |------------|-------------------------|---------|-----------------|
+     * | alert()    | Show message            | OK      | undefined       |
+     * | prompt()   | Get input from user     | OK/Cancel | string / null |
+     * | confirm()  | Ask Yes/No confirmation | OK/Cancel | true / false  |
+     **********************/
+  </script>
+</body>
+</html>
