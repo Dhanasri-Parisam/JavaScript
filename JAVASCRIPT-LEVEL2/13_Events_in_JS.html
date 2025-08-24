@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Events - Notes</title>
+</head>
+<body>
+  <div id="eventHandlingdiv">
+    Name: <input type="text" id="name" placeholder="Enter your name">
+    <button id="btn">Click Me</button>
+  </div>
+
+  <script>
+    /***********************************************************
+     * 📘 EVENTS IN JAVASCRIPT
+     * ---------------------------------------------------------
+     * An event is any action/occurrence in the browser.
+     * Events can be triggered by:
+     *   - User (click, type, scroll, focus, etc.)
+     *   - Browser/System (load, resize, error, etc.)
+     ***********************************************************/
+
+    /***********************************************************
+     * EVENT HANDLERS
+     * ---------------------------------------------------------
+     * A function that executes in response to an event.
+     * Ways to handle events:
+     *   1. Inline Event Handlers (in HTML attributes)
+     *   2. Event Properties in JS (.onclick, .onmouseover, etc.)
+     *   3. Event Listeners (addEventListener)
+     ***********************************************************/
+
+    /***********************************************************
+     * A. INLINE EVENT HANDLERS
+     * ---------------------------------------------------------
+     * Defined inside HTML directly (not recommended for big projects).
+     * Example:
+     * <button onclick="alert('Button clicked!')">Click</button>
+     ***********************************************************/
+
+
+    /***********************************************************
+     * B. EVENT PROPERTIES (.onclick, .onmouseover, etc.)
+     * ---------------------------------------------------------
+     * Attach a function directly to an event property.
+     * Limitation: Only ONE handler at a time.
+     ***********************************************************/
+    let btn1 = document.getElementById("btn");
+    btn1.onclick = function () {
+      document.body.style.backgroundColor = "yellow";
+    };
+
+
+    /***********************************************************
+     * C. ANONYMOUS FUNCTIONS AS EVENT HANDLERS
+     * ---------------------------------------------------------
+     * Instead of writing a separate function, define directly inline.
+     ***********************************************************/
+    btn1.onclick = function () {
+      document.body.style.backgroundColor = "blue";
+    };
+
+
+    /***********************************************************
+     * D. addEventListener()
+     * ---------------------------------------------------------
+     * Syntax: element.addEventListener("event", handler, useCapture)
+     * Advantages:
+     *   - Can add MULTIPLE event handlers for same element & event
+     *   - Can remove handlers with removeEventListener
+     ***********************************************************/
+    btn1.addEventListener("click", function () {
+      document.body.style.backgroundColor = "purple";
+    });
+
+    btn1.addEventListener("mouseover", function () {
+      document.body.style.backgroundColor = "orange";
+    });
+
+
+    /***********************************************************
+     * EVENT TYPES
+     ***********************************************************/
+
+    /***********************************************************
+     * 1. MOUSE EVENTS
+     * ---------------------------------------------------------
+     * - click      → single click
+     * - dblclick   → double click
+     * - mouseover  → mouse enters element
+     * - mouseout   → mouse leaves element
+     * - mousedown  → mouse button pressed
+     * - mouseup    → mouse button released
+     * - mousemove  → mouse moves
+     ***********************************************************/
+    btn1.addEventListener("dblclick", function () {
+      alert("Button double-clicked!");
+    });
+
+
+    /***********************************************************
+     * 2. KEYBOARD EVENTS
+     * ---------------------------------------------------------
+     * - keydown  → when key is pressed
+     * - keyup    → when key is released
+     * - keypress → when key is pressed (deprecated, use keydown)
+     ***********************************************************/
+    let input = document.getElementById("name");
+    input.addEventListener("keyup", function (e) {
+      console.log("Key pressed:", e.key); // logs key
+      if (e.key === "a") {
+        alert("'a' is not allowed!");
+      }
+    });
+
+
+    /***********************************************************
+     * 3. FORM EVENTS
+     * ---------------------------------------------------------
+     * - submit → when form is submitted
+     * - change → value changed (dropdown, checkbox)
+     * - focus  → input gains focus
+     * - blur   → input loses focus
+     * - input  → while typing in input
+     ***********************************************************/
+    input.addEventListener("focus", function () {
+      input.style.backgroundColor = "lightyellow";
+    });
+    input.addEventListener("blur", function () {
+      input.style.backgroundColor = "white";
+    });
+
+
+    /***********************************************************
+     * 4. WINDOW EVENTS
+     * ---------------------------------------------------------
+     * - load   → page fully loaded
+     * - resize → window resized
+     * - scroll → page scrolled
+     * - unload → page closing
+     * - error  → error occurs
+     ***********************************************************/
+    window.addEventListener("resize", function () {
+      console.log("Window resized! Width:", window.innerWidth);
+    });
+
+
+    /***********************************************************
+     * EVENT OBJECT (e or event)
+     * ---------------------------------------------------------
+     * Each event passes an "event object" with details:
+     *   - e.type   → type of event ("click", "keyup", etc.)
+     *   - e.target → element on which event occurred
+     *   - e.key    → key pressed (for keyboard events)
+     *   - e.clientX / e.clientY → mouse coordinates
+     ***********************************************************/
+    btn1.addEventListener("click", function (e) {
+      console.log("Event type:", e.type);   // click
+      console.log("Target element:", e.target); // button element
+    });
+
+
+    /***********************************************************
+     * EXTRA: RANDOM COLOR GENERATOR (Dynamic Example)
+     * ---------------------------------------------------------
+     * Click button → background changes to random hex color
+     ***********************************************************/
+    btn1.onclick = function () {
+      let values = "0123456789ABCDEF"; // 16 hex digits
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        // Math.random() → [0,1)
+        // *16 → [0,15.999...]
+        // Math.floor → integer 0–15
+        color += values[Math.floor(Math.random() * 16)];
+      }
+      document.body.style.backgroundColor = color;
+    };
+
+    /***********************************************************
+     * 📝 SUMMARY
+     * ---------------------------------------------------------
+     * Event Handling Methods:
+     *   1. Inline Event Handler  → <button onclick="fn()">
+     *   2. Event Properties      → element.onclick = fn
+     *   3. Anonymous Functions   → element.onclick = function(){}
+     *   4. addEventListener      → element.addEventListener("click", fn)
+     *
+     * Event Types:
+     *   - Mouse (click, dblclick, mouseover, etc.)
+     *   - Keyboard (keydown, keyup)
+     *   - Form (submit, change, focus, blur)
+     *   - Window (load, resize, scroll)
+     *
+     * Event Object:
+     *   - Provides extra info: type, target, key pressed, mouse position
+     ***********************************************************/
+  </script>
+</body>
+</html>
