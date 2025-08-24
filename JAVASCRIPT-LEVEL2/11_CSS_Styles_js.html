@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styles in JS</title>
+    <style>
+        .color1 {
+            color: pink;
+        }
+
+        .one {
+            color: aqua;
+        }
+
+        .two {
+            color: red;
+        }
+
+        .bordered {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Initially, div has id="color1" and class="one" -->
+    <div id="color1" class="one">
+        <p>Paragraph tag applying styles by using JS</p>
+    </div>
+
+    <!-- Image with id="img1" -->
+    <img src="https://m.media-amazon.com/images/I/81FY4l2T62L._UF894,1000_QL80_.jpg" alt="anime" id="img1">
+
+    <br><br>
+
+    <!-- Input field -->
+    Name: <input type="text" id="name">
+
+    <script>
+        // =====================
+        // 1. ACCESSING ELEMENT
+        // =====================
+        var x = document.getElementById("color1");
+
+        // =====================
+        // 2. INLINE STYLE CHANGES (style property affects only inline style)
+        // =====================
+        x.style.color = "blue";                // overrides text color directly (ignores CSS class color)
+        x.style.border = "2px solid black";    // adds border inline
+
+        console.log(x.style);  // shows only inline styles set using JS (not CSS file styles)
+
+        // =====================
+        // 3. ATTRIBUTE ACCESS
+        // =====================
+        var newclass = document.getElementById('color1');
+        console.log(newclass.getAttribute("class"));  
+        // shows "one" because <div> initially had class="one"
+
+        // WARNING: setAttribute('class', 'one') overwrites ALL classes with just "one"
+        newclass.setAttribute('class', 'one');
+        console.log(newclass); // now element has only class="one"
+
+        // =====================
+        // 4. IMAGE STYLE + ATTRIBUTES
+        // =====================
+        var image = document.getElementById("img1");
+        image.style.border = "5px solid black"; // add black border
+        image.style.width = "400px";            // force width
+        image.style.height = "400px";           // force height
+
+        console.log(image.style);               // logs inline styles applied via JS
+
+        // Get attributes
+        console.log(image.getAttribute('src'));  // prints image URL
+        console.log(image.getAttribute('alt'));  // prints "anime"
+        console.log(image.getAttribute('id2'));  // id2 does not exist → prints null
+
+        // Update alt attribute
+        image.setAttribute('alt', 'demon slayer anime image');
+        console.log(image.getAttribute('alt'));  // prints updated alt
+
+        // =====================
+        // 5. FORM INPUT ATTRIBUTE
+        // =====================
+        var formelement = document.getElementById("name");
+        console.log(formelement.getAttribute("value")); // prints null (no value attribute in HTML)
+
+        // sets a default value (like placeholder effect, but permanent)
+        formelement.setAttribute("value", "Enter your name");
+
+        // =====================
+        // 6. CLASSLIST (MODERN WAY TO HANDLE MULTIPLE CLASSES)
+        // =====================
+        var multi = document.getElementById('color1');
+
+        // Add new class without removing existing ones
+        multi.classList.add('two');  
+        // Now div has both class="one two"
+
+        // Remove a class
+        multi.classList.remove('one');  
+        // Now div has only class="two"
+
+        // Toggle a class (adds if not present, removes if present)
+        multi.classList.toggle('color1');  
+        // If "color1" not there → it gets added. If already there → it gets removed.
+
+        // Check if element has a specific class → returns true/false
+        console.log(multi.classList.contains('two'));  // true (we added it above)
+
+        // View all classes applied
+        console.log(multi.classList);  // shows ["two", "color1"] etc.
+    </script>
+</body>
+</html>
