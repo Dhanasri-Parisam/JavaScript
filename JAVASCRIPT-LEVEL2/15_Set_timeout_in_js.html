@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SetTimeout & SetInterval Notes</title>
+</head>
+<body>
+  <h1>JavaScript: setTimeout & setInterval</h1>
+
+  <script>
+    /************************************************************
+     * 📌 NOTES
+     * ----------------------------------------------------------
+     * setTimeout(function, delay, param1, param2, ...)
+     *    → Runs the function once after the given delay (ms).
+     * 
+     * clearTimeout(timeoutID)
+     *    → Cancels a timeout set by setTimeout().
+     * 
+     * setInterval(function, delay, param1, param2, ...)
+     *    → Runs the function repeatedly at intervals (ms).
+     * 
+     * clearInterval(intervalID)
+     *    → Cancels a repeating interval set by setInterval().
+     ************************************************************/
+
+
+    /************************************************************
+     * 🔹 Example 1: Basic setTimeout
+     ************************************************************/
+    setTimeout(() => {
+      console.log("Example 1 → This runs after 2 seconds");
+    }, 2000);
+
+
+    /************************************************************
+     * 🔹 Example 2: Passing arguments into setTimeout
+     ************************************************************/
+    setTimeout((name) => {
+      console.log("Example 2 → Hello " + name);
+    }, 1500, "Dhanu");
+
+
+    /************************************************************
+     * 🔹 Example 3: Cancel setTimeout before it runs
+     ************************************************************/
+    let timer = setTimeout(() => {
+      console.log("Example 3 → You won’t see this because it is cleared");
+    }, 3000);
+    clearTimeout(timer);
+
+
+    /************************************************************
+     * 🔹 Example 4: setInterval for repeated tasks
+     ************************************************************/
+    let counter = 1;
+    let interval = setInterval(() => {
+      console.log("Example 4 → Interval call " + counter);
+      counter++;
+      if (counter > 5) {
+        clearInterval(interval);
+        console.log("Example 4 → Interval stopped");
+      }
+    }, 1000);
+
+
+    /************************************************************
+     * 🔹 Example 5: Using setTimeout inside setInterval
+     ************************************************************/
+    let delayedInterval = setInterval(() => {
+      setTimeout(() => {
+        console.log("Example 5 → Timeout inside interval");
+      }, 500);
+    }, 2000);
+    setTimeout(() => clearInterval(delayedInterval), 7000);
+
+
+    /************************************************************
+     * 🔹 Example 6: Recursive setTimeout (alternative to setInterval)
+     ************************************************************/
+    function repeatMessage() {
+      console.log("Example 6 → Recursive Timeout message");
+      setTimeout(repeatMessage, 2000);
+    }
+    // repeatMessage(); // Uncomment to run
+
+
+    /************************************************************
+     * 🔹 Example 7: Countdown Timer using setInterval
+     ************************************************************/
+    let timeLeft = 5;
+    let countdown = setInterval(() => {
+      console.log("Example 7 → Time left: " + timeLeft);
+      timeLeft--;
+      if (timeLeft < 0) {
+        clearInterval(countdown);
+        console.log("Example 7 → Time’s up!");
+      }
+    }, 1000);
+
+
+    /************************************************************
+     * 🔹 Example 8: Stop timeout dynamically
+     ************************************************************/
+    let timeoutID = setTimeout(() => {
+      console.log("Example 8 → You won’t see this if canceled in time");
+    }, 4000);
+    setTimeout(() => {
+      clearTimeout(timeoutID);
+      console.log("Example 8 → Timeout was canceled successfully");
+    }, 2000);
+
+
+    /************************************************************
+     * 🔹 Example 9: Animation using setInterval
+     ************************************************************/
+    let pos = 0;
+    let animation = setInterval(() => {
+      pos += 10;
+      console.log("Example 9 → Box moved to " + pos + "px");
+      if (pos >= 100) clearInterval(animation);
+    }, 500);
+
+
+    /************************************************************
+     * 🔹 Example 10: Debounce-like behavior with setTimeout
+     ************************************************************/
+    let debounceTimer;
+    function debounceAction() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        console.log("Example 10 → Debounced action executed");
+      }, 1000);
+    }
+
+    // Simulate typing (user presses keys quickly)
+    debounceAction();
+    debounceAction();
+    debounceAction(); // Only last one runs after 1s
+  </script>
+</body>
+</html>
