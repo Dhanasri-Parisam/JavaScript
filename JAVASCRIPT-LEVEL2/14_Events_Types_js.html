@@ -28,38 +28,39 @@
 
     // click → single click
     document.getElementById("btn").addEventListener("click", function() {
-      alert("Button clicked!");
+      alert("Button clicked!"); // Output: Alert pops up with "Button clicked!" when button is clicked
     });
 
     // dblclick → double click
     document.getElementById("btn").addEventListener("dblclick", function() {
-      alert("Button double-clicked!");
+      alert("Button double-clicked!"); // Output: Alert pops up with "Button double-clicked!" on double-click
     });
 
     // mouseover → when mouse enters
     document.getElementById("btn").addEventListener("mouseover", function() {
-      this.style.backgroundColor = "lightgreen";
+      this.style.backgroundColor = "lightgreen"; // Output: Button bg changes to lightgreen on mouse over
     });
 
     // mouseout → when mouse leaves
     document.getElementById("btn").addEventListener("mouseout", function() {
-      this.style.backgroundColor = "";
+      this.style.backgroundColor = ""; // Output: Button bg resets to default on mouse out
     });
 
     // mousedown → when mouse button pressed
     document.getElementById("btn").addEventListener("mousedown", function() {
-      this.innerText = "Mouse Down!";
+      this.innerText = "Mouse Down!"; // Output: Button text changes to "Mouse Down!" while mouse button is held
     });
 
     // mouseup → when mouse button released
     document.getElementById("btn").addEventListener("mouseup", function() {
-      this.innerText = "Mouse Up!";
+      this.innerText = "Mouse Up!"; // Output: Button text changes to "Mouse Up!" on mouse button release
     });
 
     // mousemove → track mouse position
     document.addEventListener("mousemove", function(e) {
       document.getElementById("output").innerText =
         "Mouse at: X=" + e.clientX + ", Y=" + e.clientY;
+      // Output: <p id="output"> shows current mouse pointer X/Y coordinates as you move the mouse
     });
 
 
@@ -70,16 +71,19 @@
     // keydown → when key is pressed
     document.getElementById("name").addEventListener("keydown", function(e) {
       console.log("Key down:", e.key);
+      // Output: Console logs "Key down: <key>" whenever a key is pressed in the input
     });
 
     // keyup → when key is released
     document.getElementById("name").addEventListener("keyup", function(e) {
       console.log("Key up:", e.key);
+      // Output: Console logs "Key up: <key>" whenever a key is released in the input
     });
 
     // keypress → (deprecated, but works in many browsers)
     document.getElementById("name").addEventListener("keypress", function(e) {
       console.log("Key pressed:", e.key);
+      // Output: Console logs "Key pressed: <key>" while a character-producing key is held down
     });
 
 
@@ -91,26 +95,31 @@
     document.getElementById("myForm").addEventListener("submit", function(e) {
       e.preventDefault(); // prevent page reload
       alert("Form submitted!");
+      // Output: Alert "Form submitted!" pops up and page does NOT reload
     });
 
     // change → value changed (e.g., dropdown)
     document.getElementById("dropdown").addEventListener("change", function() {
       alert("You selected: " + this.value);
+      // Output: Alert "You selected: <value>" pops up when you select from dropdown
     });
 
     // focus → input gets focus
     document.getElementById("name").addEventListener("focus", function() {
       this.style.backgroundColor = "lightyellow";
+      // Output: Input box background changes to light yellow when focused
     });
 
     // blur → input loses focus
     document.getElementById("name").addEventListener("blur", function() {
       this.style.backgroundColor = "white";
+      // Output: Input box background returns to white when focus is lost
     });
 
     // input → fires as user types
     document.getElementById("name").addEventListener("input", function() {
       document.getElementById("output").innerText = "Typing: " + this.value;
+      // Output: <p id="output"> shows "Typing: <current input value>" as you type in the input
     });
 
 
@@ -121,27 +130,32 @@
     // load → when page finishes loading
     window.addEventListener("load", function() {
       console.log("Page fully loaded!");
+      // Output: Console logs "Page fully loaded!" when the page is loaded
     });
 
     // resize → when window size changes
     window.addEventListener("resize", function() {
       console.log("Window resized! Width:", window.innerWidth);
+      // Output: Console logs "Window resized! Width: <current width>" whenever window is resized
     });
 
     // scroll → when page is scrolled
     window.addEventListener("scroll", function() {
       console.log("Page scrolled. ScrollY:", window.scrollY);
+      // Output: Console logs "Page scrolled. ScrollY: <scrollY>" whenever page is scrolled
     });
 
     // beforeunload → when leaving page
     window.addEventListener("beforeunload", function(e) {
       e.preventDefault();
       e.returnValue = ""; // shows confirm dialog
+      // Output: Shows browser confirm dialog when you try to reload/close tab ("Do you want to leave?")
     });
 
     // error → when error occurs
     window.addEventListener("error", function(e) {
       console.error("Error occurred:", e.message);
+      // Output: Console logs "Error occurred: <error message>" if any error happens on the page
     });
 
 
@@ -151,6 +165,9 @@
     document.getElementById("btn").addEventListener("click", function(e) {
       console.log("Event type:", e.type);   // e.g. "click"
       console.log("Target element:", e.target); // button
+      // Output (in console): 
+      // Event type: click
+      // Target element: <button id="btn">...</button>
     });
   </script>
 </body>
