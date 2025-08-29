@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filter in JS</title>
+</head>
+<body>
+  <script>
+    /*
+     ----------------------------------------------------------------
+     JavaScript Array.filter() Method
+     ----------------------------------------------------------------
+     → The filter() method creates a NEW array containing elements
+       that satisfy a given condition (return true).
+     → Syntax: array.filter(callbackFunction(element, index, array))
+     → Parameters:
+         1. element → current element being processed
+         2. index   → index of current element
+         3. array   → the entire array
+     → filter() does not modify the original array.
+     → If condition is true → element is included.
+       If condition is false → element is skipped.
+     ----------------------------------------------------------------
+    */
+
+    // Example 1: Basic example - filter even numbers
+    var nums = [1,2,3,4,5,6,7];
+    var even = nums.filter(function(ele,index, arr){
+      return ele % 2 == 0; // keep only even numbers
+    });
+    console.log("Even numbers:", even); // [2,4,6]
+
+    // -------------------------------------------------------------
+    // Example 2: Filter odd numbers
+    var odd = nums.filter(function(ele){
+      return ele % 2 != 0; // keep only odd numbers
+    });
+    console.log("Odd numbers:", odd); // [1,3,5,7]
+
+    // -------------------------------------------------------------
+    // Example 3: Filter numbers greater than 4
+    var greaterThanFour = nums.filter(function(ele){
+      return ele > 4;
+    });
+    console.log("Numbers > 4:", greaterThanFour); // [5,6,7]
+
+    // -------------------------------------------------------------
+    // Example 4: Filter numbers less than or equal to 3
+    var lessThanEqualThree = nums.filter(function(ele){
+      return ele <= 3;
+    });
+    console.log("Numbers <= 3:", lessThanEqualThree); // [1,2,3]
+
+    // -------------------------------------------------------------
+    // Example 5: Filter names starting with 'A'
+    var names = ["Amit", "Rahul", "Anita", "John", "Arun"];
+    var namesWithA = names.filter(function(ele){
+      return ele.startsWith("A"); // keep only names starting with A
+    });
+    console.log("Names starting with A:", namesWithA); // ["Amit","Anita","Arun"]
+
+    // -------------------------------------------------------------
+    // Example 6: Filter numbers which are divisible by 3
+    var divisibleByThree = nums.filter(function(ele){
+      return ele % 3 == 0;
+    });
+    console.log("Numbers divisible by 3:", divisibleByThree); // [3,6]
+  </script>
+</body>
+</html>

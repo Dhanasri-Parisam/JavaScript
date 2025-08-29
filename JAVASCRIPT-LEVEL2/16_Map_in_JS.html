@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Methods</title>
+</head>
+<body>
+  <script>
+    /*
+     ----------------------------------------------------------------
+     JavaScript Array.map() Method
+     ----------------------------------------------------------------
+     → The map() method creates a NEW array by applying a function 
+       on every element of the original array.
+     → Syntax: array.map(callbackFunction(element, index, array))
+     → Parameters:
+         1. element → current element being processed
+         2. index   → index of current element
+         3. array   → the entire array
+     → map() always returns a NEW array (it does not modify original).
+     ----------------------------------------------------------------
+    */
+
+    // Example 1: Using Anonymous Function (function without name)
+    var birthyear = [2000, 2015, 2017, 2018, 2020, 2025];
+    var ages = birthyear.map(function(ele, index, arr){
+      // Calculate age in 2025 for each birth year
+      let age = 2025 - ele;
+      return age;  // returning value for new array
+    });
+
+    // console.table() prints data in a tabular format (good for arrays/objects)
+    console.table(birthyear); // Original array (unchanged)
+    console.table(ages);      // New array (ages)
+
+    // Example 2: Using Named Function (normal function)
+    // Here, we define a function separately and then pass it to map()
+    birthyear.map(findDiffAges);
+    function findDiffAges(ele, index, arr){
+      let age = 2025 - ele;
+      return age; // returning value for new array
+    }
+    // ⚠ NOTE: In this case, result is not stored in a variable, 
+    // so it's calculated but not used anywhere.
+
+    // Example 3: Function with no return (undefined results)
+    var undefinedfun = birthyear.map(funtionundefine);
+    function funtionundefine(ele){
+      let age = 2020 - ele;
+      // return age;   <-- commented out
+      // return 1; 
+    }
+    // Since nothing is returned, map() puts 'undefined' in the new array
+    console.table(undefinedfun); // Output: Array of undefined values
+  </script>
+</body>
+</html>
