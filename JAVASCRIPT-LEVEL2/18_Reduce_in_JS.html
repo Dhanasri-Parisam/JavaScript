@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reduce in JS</title>
+</head>
+<body>
+  <script>
+    /*
+     ----------------------------------------------------------------
+     JavaScript Array.reduce() Method
+     ----------------------------------------------------------------
+     → The reduce() method applies a callback function to each element 
+       of the array, reducing it to a single value (like sum, max, min).
+     → Syntax: array.reduce(callback(accumulator, element, index, array), initialValue)
+     
+     Parameters:
+       1. accumulator (acc) → stores the result of previous computations
+       2. element (ele)     → current element being processed
+       3. index             → index of current element (optional)
+       4. array             → the whole array (optional)
+     
+     → initialValue is optional but recommended (gives starting value to accumulator).
+     → If no initialValue is given, reduce() uses the first element as the initial accumulator.
+     ----------------------------------------------------------------
+    */
+
+    // Example 1: Find maximum number in array
+    var arr = [1,2,3,4,5,6,7,8];
+    var maxi = arr.reduce(function(acc, ele) {
+      return (acc > ele) ? acc : ele;
+    }, arr[0]); // initial value = first element
+    console.log("Maximum:", maxi); // 8
+
+    // Example 2: Find minimum number in array
+    var miniarr = [1,2,3,4,5,6,7,8,0];
+    var mini = miniarr.reduce(function(acc,ele){
+      return (acc < ele) ? acc : ele;
+    }, miniarr[0]); // correct: use miniarr[0] as initial value
+    console.log("Minimum:", mini); // 0
+
+    // Example 3: Sum of all elements
+    var maxSum = [1,2,3,4,4,5,5,10,5,5];
+    let sum = maxSum.reduce(function(acc,ele){
+      return acc + ele; // add each element to accumulator
+    }, 0);
+    console.log("Sum:", sum);
+
+    // Example 4: Using arrow function for sum
+    var sum1 = maxSum.reduce((acc, ele) => acc + ele, 0);
+    console.log("Sum (arrow function):", sum1);
+
+    // -------------------------------------------------------------
+    // More Examples:
+    // -------------------------------------------------------------
+
+    // Example 5: Product of all numbers
+    var product = arr.reduce(function(acc, ele){
+      return acc * ele;
+    }, 1);
+    console.log("Product:", product); // 40320
+
+    // Example 6: Count frequency of elements in an array
+    var fruits = ["apple", "mango", "apple", "orange", "mango", "apple"];
+    var freq = fruits.reduce(function(acc, ele){
+      acc[ele] = (acc[ele] || 0) + 1; // increase count if already present
+      return acc;
+    }, {});
+    console.log("Frequency of fruits:", freq); 
+    // { apple: 3, mango: 2, orange: 1 }
+
+    // Example 7: Flatten nested arrays
+    var nested = [[1,2],[3,4],[5,6]];
+    var flat = nested.reduce(function(acc, ele){
+      return acc.concat(ele); // merge arrays
+    }, []);
+    console.log("Flattened array:", flat); // [1,2,3,4,5,6]
+
+    // Example 8: Find average of numbers
+    var numbers = [10, 20, 30, 40, 50];
+    var average = numbers.reduce(function(acc, ele, index, arr){
+      acc += ele;
+      if(index === arr.length - 1){ // at last element
+        return acc / arr.length;
+      }
+      return acc;
+    }, 0);
+    console.log("Average:", average); // 30
+
+    // Example 9: Remove duplicates
+    var dupArr = [1,2,2,3,4,4,5];
+    var unique = dupArr.reduce(function(acc, ele){
+      if(!acc.includes(ele)) acc.push(ele);
+      return acc;
+    }, []);
+    console.log("Unique values:", unique); // [1,2,3,4,5]
+  </script>
+</body>
+</html>
