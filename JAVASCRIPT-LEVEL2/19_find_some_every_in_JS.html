@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>find, some, every in JS</title>
+</head>
+<body>
+  <script>
+    /*
+     ----------------------------------------------------------------
+     JavaScript find(), some(), and every()
+     ----------------------------------------------------------------
+
+     1) find():
+        → Returns the FIRST element in the array that satisfies the condition.
+        → If no element matches, it returns undefined.
+        → Syntax: array.find(callback(element, index, array))
+
+     2) some():
+        → Returns true if AT LEAST ONE element in the array satisfies the condition.
+        → Otherwise returns false.
+        → Syntax: array.some(callback(element, index, array))
+
+     3) every():
+        → Returns true if ALL elements in the array satisfy the condition.
+        → Otherwise returns false.
+        → Syntax: array.every(callback(element, index, array))
+
+     ----------------------------------------------------------------
+    */
+
+    // ----------------- Example 1: find() -----------------
+    let places = ["hyd", "anakapalle", "amaravathi", "guntur", "vizag"];
+
+    // Find the first place that starts with "a"
+    let findele = places.find(function(ele) {
+      return ele.startsWith("a");
+    });
+    console.log("find (first starting with a):", findele); // anakapalle
+
+    // If no match → returns undefined
+    let noCity = places.find(function(ele) {
+      return ele.startsWith("z");
+    });
+    console.log("find (no match):", noCity); // undefined
+
+    // ----------------- Example 2: some() -----------------
+
+    let city1 = ["vizag", "peddapuram", "kakinada", "tuni", "anakapalle", "amaravathi"];
+
+    // Get ALL cities that start with "a"
+    let getcity1 = city1.filter(function(ele){
+      return ele.startsWith("a");
+    });
+
+    console.log("Cities starting with 'a':", getcity1); 
+    // ["anakapalle", "amaravathi"]
+
+
+    let city = ["vizag","prakasam", "peddapuram", "kakinada", "tuni"];
+
+    // Check if ANY city starts with "p"
+    let getcity = city.some(function(ele){
+      return ele.startsWith("p");
+    });
+    console.log("some (any city starts with a?):", getcity); // false
+
+    // Another example: check if ANY city has length > 5
+    let checkLength = city.some(function(ele){
+      return ele.length > 5;
+    });
+    console.log("some (any city length > 5?):", checkLength); // true
+
+    // ----------------- Example 3: every() -----------------
+    let marks = [10, 20, 30, 40];
+
+    // Check if ALL marks are less than 35
+    let getMarksUpdate = marks.every(function(ele){
+      return ele < 35;
+    });
+    console.log("every (all marks < 35?):", getMarksUpdate); // false
+
+    // Another example: check if ALL marks are >= 10
+    let allPass = marks.every(function(ele){
+      return ele >= 10;
+    });
+    console.log("every (all marks >= 10?):", allPass); // true
+
+    // ----------------- Extra Combined Examples -----------------
+
+    // find() → get first even number
+    let numbers = [5, 7, 8, 9, 10];
+    let firstEven = numbers.find(num => num % 2 === 0);
+    console.log("First even number:", firstEven); // 8
+
+    // some() → check if array has negative numbers
+    let nums = [1, 2, 3, -4, 5];
+    let hasNegative = nums.some(num => num < 0);
+    console.log("Array has negative?", hasNegative); // true
+
+    // every() → check if all are positive
+    let allPositive = nums.every(num => num > 0);
+    console.log("All positive?", allPositive); // false
+  </script>
+</body>
+</html>
