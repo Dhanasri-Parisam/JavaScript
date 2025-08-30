@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Call Stack Example</title>
+</head>
+
+<body>
+    <h1>JavaScript Call Stack Example</h1>
+    <p>Open the browser console to see the output of the call stack example.</p>
+    <script>
+        // ------------------------------------------
+        // This script demonstrates how the JavaScript
+        // Call Stack works step by step.
+        // ------------------------------------------
+
+        // Function 'hello'
+        // When called, it simply logs a message.
+        function hello() {
+            console.log("inside hello function"); 
+            // At this point, hello() finishes execution and returns control
+            // back to the function that called it (demo()).
+        }
+
+        // Function 'demo'
+        // It first logs a message, then calls hello().
+        function demo() {
+            console.log("i am demo fucntion"); 
+            // Call hello() → pushes hello() onto the call stack
+            hello(); 
+            // After hello() finishes, control comes back here
+            // and then demo() finishes execution.
+        }
+
+        // Execution starts here (global execution context)
+        console.log("function starts"); 
+        // Call demo() → pushes demo() onto the call stack
+        demo();
+        // After demo() finishes, control comes back here
+        console.log("bye! function ended"); 
+        // Script execution completed → Call stack becomes empty
+
+
+        // visualizing the Call Stack
+        function one(){
+            return 1;
+        }
+
+        function two(){
+            return one() + 1;
+        }
+
+        function three(){
+            let ans = one() + two();
+            console.log(ans);
+        }
+
+        // Call three() to see the call stack in action
+        three();
+
+        
+
+    </script>
+</body>
+</html>
