@@ -2,66 +2,128 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Call Stack Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Call Stack Example</title>
 </head>
 
 <body>
-    <h1>JavaScript Call Stack Example</h1>
-    <p>Open the browser console to see the output of the call stack example.</p>
-    <script>
-        // ------------------------------------------
-        // This script demonstrates how the JavaScript
-        // Call Stack works step by step.
-        // ------------------------------------------
+  <h1 id="callstackh1">JavaScript Call Stack Example</h1>
+  <p id="callstackP">Open the browser console to see the output.</p>
 
-        // Function 'hello'
-        // When called, it simply logs a message.
-        function hello() {
-            console.log("inside hello function"); 
-            // At this point, hello() finishes execution and returns control
-            // back to the function that called it (demo()).
-        }
+  <script>
+    // ===================================================
+    // 🔹 JavaScript Call Stack & Single Thread
+    // ---------------------------------------------------
+    // - JavaScript is **single-threaded** → only ONE call stack exists.
+    // - At any time, only one function runs on the stack.
+    // - Works in LIFO (Last In, First Out) order.
+    // - If a function is executing, all others must wait.
+    // ===================================================
 
-        // Function 'demo'
-        // It first logs a message, then calls hello().
-        function demo() {
-            console.log("i am demo fucntion"); 
-            // Call hello() → pushes hello() onto the call stack
-            hello(); 
-            // After hello() finishes, control comes back here
-            // and then demo() finishes execution.
-        }
+    // Example 1: Simple function calls
+    function hello() {
+      console.log("Inside hello()");
+    }
 
-        // Execution starts here (global execution context)
-        console.log("function starts"); 
-        // Call demo() → pushes demo() onto the call stack
-        demo();
-        // After demo() finishes, control comes back here
-        console.log("bye! function ended"); 
-        // Script execution completed → Call stack becomes empty
+    function demo() {
+      console.log("Inside demo()");
+      hello(); // hello() pushed → executed → popped
+    }
 
+    console.log("Program starts");
+    demo(); // demo() pushed → executes hello() → popped
+    console.log("Program ends");
 
-        // visualizing the Call Stack
-        function one(){
-            return 1;
-        }
+    // ===================================================
+    // Example 2: Nested calls (visualize stack order)
+    // ===================================================
+    function one() {
+      return 1;
+    }
 
-        function two(){
-            return one() + 1;
-        }
+    function two() {
+      // Calls one() twice
+      return one() + one();
+    }
 
-        function three(){
-            let ans = one() + two();
-            console.log(ans);
-        }
+    function three() {
+      let ans = one() + two(); // Flow: one() → two() → one() → one()
+      console.log("Final Answer:", ans);
+    }
 
-        // Call three() to see the call stack in action
-        three();
+    three();
 
-        
+    // 🔹 Execution Flow (three()):
+    // Global → three()
+    //   → one() → return 1
+    //   → two()
+    //       → one() → return 1
+    //       → one() → return 1
+    //       → return 2
+    //   → total = 1 + 2 = 3
+    //   → log "Final Answer: 3"
+    // three() done → Global done → Stack empty
+    //
+    // ✅ Because JS is single-threaded:
+    // - Only one function executes at a time.
+    // - Others wait until the stack is free.
+    // - Asynchronous features (setTimeout, promises) exist 
+    //   to prevent blocking the main thread.
+    // ===================================================
 
-    </script>
+    // Example 3: Functions calling each other
+    function multiply(a, b) {
+      console.log(a * b);
+    }
+    function sum(a, b) {
+      console.log(a + b);
+      multiply(a, b);
+    }
+    sum(5, 10); // Shows nested call behavior again
+
+    // ===================================================
+    // Example 4: Asynchronous Call (setTimeout)
+    // ===================================================
+    setTimeout(() => {
+      alert("I will come after 3 sec.");
+    }, 3000);
+    console.log("welcome to console");
+
+    // Flow:
+    // - setTimeout callback is sent to Web APIs
+    // - After 3s, callback goes into Event Queue
+    // - Executed only when Call Stack is empty
+    // ===================================================
+
+    // Example 5: Callback Hell (nested callbacks)
+    let p = document.getElementById("callstackP");
+
+    function ChangeColor(color, delay, nextChangeCol) {
+      setTimeout(() => {
+        p.style.color = color;
+        if (nextChangeCol) nextChangeCol();
+      }, delay);
+    }
+
+    // Nested callbacks → "Callback Hell"
+    ChangeColor("green", 3000, () => {
+      ChangeColor("red", 5000, () => {
+        ChangeColor("yellow", 2000, () => {
+          ChangeColor("pink", 1000);
+        });
+      });
+    });
+
+    // ===================================================
+    // 📌 Summary Notes:
+    // 1. JavaScript has a single Call Stack (one function at a time).
+    // 2. Synchronous functions block execution until finished.
+    // 3. Asynchronous functions (setTimeout, promises, async/await)
+    //    prevent blocking by using Web APIs + Event Loop.
+    // 4. Nested callbacks → Callback Hell (hard to manage).
+    // ===================================================
+  </script>
 </body>
+
 </html>
