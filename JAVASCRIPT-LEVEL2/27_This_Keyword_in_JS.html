@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This keyword in JS</title>
+</head>
+<body>
+  <!-- In the DOM every HTML element is an object -->
+  <!-- Example: <input type="button" onclick="console.log(this)" value="click"> -->
+  <input type="button" id="inputField" value="button">
+
+  <script>
+    // =====================================================
+    // 1. `this` outside a function / object (global scope)
+    // =====================================================
+    // In browsers:
+    // - var at global scope → attaches to window
+    // - let/const at global scope → does NOT attach to window
+    // - `this` in global scope (non-strict) → window object
+
+    var a = 10;
+    console.log(this);      // → Window (global object)
+    console.log(window.a);  // → 10 (because var is global)
+    console.log(a);         // → 10
+    console.log(this.a);    // → 10
+
+    var ab = { name: "Dhanu" };
+    console.log(this.ab);   // → undefined (ab is not attached to window unless declared with var globally)
+
+    // =====================================================
+    // 2. `this` inside a regular function
+    // =====================================================
+    // In non-strict mode, `this` → window
+    // In strict mode, `this` → undefined
+    var n = "Dhanu";
+    function name() {
+      console.log(this.n);     // → "Dhanu" (because `n` is var → global → window.n)
+      console.log(window.n);   // → "Dhanu"
+    }
+    name();
+
+    // =====================================================
+    // 3. `this` inside a method
+    // =====================================================
+    // In an object method, `this` → the object that called the method
+    var movie = {
+      name: "Dude",
+      getName: function () {
+        console.log(this);   // → movie object itself
+      }
+    }
+    movie.getName();
+
+    // =====================================================
+    // 4. `this` inside an event handler
+    // =====================================================
+    // In DOM event handlers, `this` → the element that received the event
+    document.getElementById("inputField").onclick = function () {
+      this.style.background = 'green'; // button background turns green
+      this.style.color = 'pink';       // button text turns pink
+      console.log(this);               // → <input> element itself
+    };
+
+    // =====================================================
+    // 5. Strict Mode Examples
+    // =====================================================
+    "use strict"; // turn strict mode ON
+
+    // ❌ Example A: Accidental global variable
+    // x = 10;   // Error: x is not defined (in strict mode)
+    // console.log(x);
+
+    // Example B: `this` in a normal function
+    function test() {
+      console.log(this);  // → undefined (not window in strict mode)
+    }
+    test();
+
+    // ❌ Example C: Duplicate parameters not allowed
+    // function myFunc(a, a) {  // Error
+    //   return a + a;
+    // }
+
+    // ❌ Example D: Reserved keywords cannot be used
+    // var public = 10;  // Error
+
+    // =====================================================
+    // ✅ Summary:
+    // - Global scope: this = window (non-strict)
+    // - Regular function: this = window (non-strict), undefined (strict)
+    // - Method call: this = object that owns the method
+    // - Event handler: this = element that received the event
+    // - Strict mode prevents:
+    //     - Accidental globals
+    //     - this defaulting to window
+    //     - Duplicate parameters
+    //     - Reserved word misuse
+    // =====================================================
+  </script>
+</body>
+</html>
