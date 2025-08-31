@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closure in JavaScript</title>
+</head>
+<body>
+
+  <!-- Button to trigger count update -->
+  <input type="button" onclick="updateCount()" value="click here!">
+  <p id="count">button clicked:0</p>
+
+  <script>
+    // ======================================================
+    // 🔹 Example 1: Problem with Global Counter
+    // ------------------------------------------------------
+    // If we declare a counter globally, any function
+    // can modify it → insecure.
+    //
+    // let cnt = 0;
+    // function updateCount(){
+    //   cnt += 1;
+    //   p = document.getElementById("count");
+    //   p.innerText = `button clicked: ${cnt}`;
+    // }
+    // ======================================================
+
+
+    // ======================================================
+    // 🔹 Example 2: Secure Counter using Closure
+    // ------------------------------------------------------
+    // `cnt` is private inside updateCountSecure().
+    // Only `inner()` can access/modify it → SAFE.
+    // Even after updateCountSecure() finishes,
+    // `inner()` "remembers" cnt (Closure).
+    // ======================================================
+    function updateCountSecure() {
+      let cnt = 0;  // private variable
+      function inner() {
+        cnt += 1; // only inner() can update cnt
+        p = document.getElementById("count");
+        p.innerText = `button clicked: ${cnt}`;
+      }
+      return inner; // return inner() so it can be used outside
+    }
+
+    let updateCount = updateCountSecure(); // closure created
+    console.log(updateCount); // logs the inner() function
+
+    let currcount = updateCountSecure(); // another closure with its own cnt
+    currcount(); // updates count for this separate closure
+
+    // ======================================================
+    // 🔹 Example 3: Function Scope vs Inner Function
+    // ------------------------------------------------------
+    // inner() can access outer() variables.
+    // But outer variables are NOT accessible globally.
+    // ======================================================
+    function outer() {
+      var x = 5;
+      console.log(x + 2); // 7
+      function inner() {
+        var x = 10;
+        console.log(x + 1); // 11
+      }
+      inner(); // Works: inner is inside outer
+    }
+    outer();
+    // inner(); // ❌ Error: inner is not in global scope
+    console.log(outer); // logs the function definition of outer
+
+    // ======================================================
+    // 🔹 Example 4: Closure keeps data alive
+    // ------------------------------------------------------
+    // outer1() returns inner1().
+    // Even after outer1() is finished, inner1()
+    // still has access to `x`.
+    // ======================================================
+    function outer1() {
+      let x = "closure accessing outside function";
+      console.log("this is outer function1");
+
+      function inner1() {
+        console.log(x); // can access outer1's variable
+        console.log("this is inner function");
+      }
+      return inner1; // return inner1 so it can be used later
+    }
+
+    let res = outer1();
+    res(); 
+    // Output order:
+    // this is outer function1
+    // closure accessing outside function
+    // this is inner function
+
+    // ======================================================
+    // 🔹 Example 5: Passing arguments into closure
+    // ------------------------------------------------------
+    // outer(x) returns inner(y)
+    // inner() can use both x (from outer) and y (argument).
+    // ======================================================
+    function outer(x) {
+      return function inner(y) {
+        console.log(x + y); // combines outer & inner values
+      }
+    }
+
+    let fun1 = outer(7); // x = 7 saved in closure
+    fun1(10);            // y = 10 → prints 17
+
+    /*
+      Closure definition → inner() remembers x from outer()
+      Secure data → x cannot be directly accessed, only through inner()
+      Each call creates a new closure → if we did outer(20), it would create another closure with x = 20
+      Outer function variables stay alive → x = 7 stays in memory as long as fun1 exists
+    */
+
+  </script>
+</body>
+</html>
