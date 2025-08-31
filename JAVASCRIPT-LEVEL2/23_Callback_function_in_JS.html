@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Callback Function in JS</title>
+</head>
+<body>
+  <script>
+
+    /*
+    A callback function is a function passed as an argument to another function.
+
+    Callbacks allow us to control the order of execution (useful in async operations like API calls, timers, file reading).
+
+    Instead of writing repetitive logic, we can pass different functions (add, product, subtract, divide) into the same calculator function.
+
+    Example in real life: setTimeout, setInterval, and event listeners all use callbacks.
+    */
+
+    // 🔹 Example 1: Basic Callback Example
+    function first(callback){   // 'callback' is a function passed as an argument
+      callback();               // call the function passed
+      console.log("This is the first function");
+    }
+
+    function second(){
+      console.log("This is the second function");
+    }
+
+    // Calling 'first' and passing 'second' as a callback
+    first(second);
+
+    // --------------------------------------------------
+
+    // 🔹 Example 2: Calculator using callback functions
+    function add(a, b){
+      console.log("Addition:", a + b);
+    }
+
+    function product(a, b){
+      console.log("Multiplication:", a * b);
+    }
+
+    function calculator(a, b, operation){
+      // operation is a callback function (like add, product, etc.)
+      operation(a, b);
+    }
+
+    calculator(10, 5, add);      // Pass 'add' as callback
+    calculator(10, 5, product);  // Pass 'product' as callback
+
+    // --------------------------------------------------
+
+    // 🔹 Example 3: Subtraction using callback
+    function subtract(a, b){
+      console.log("Subtraction:", a - b);
+    }
+
+    calculator(20, 8, subtract); // Reuse the same calculator function
+
+    // --------------------------------------------------
+
+    // 🔹 Example 4: Division using callback
+    function divide(a, b){
+      if(b !== 0){
+        console.log("Division:", a / b);
+      } else {
+        console.log("Error: Division by zero!");
+      }
+    }
+
+    calculator(50, 10, divide);
+
+    // --------------------------------------------------
+
+    // 🔹 Example 5: Real-world Example - Delayed Greeting
+    function greet(name){
+      console.log("Hello, " + name + " 👋");
+    }
+
+    // setTimeout takes a callback function
+    setTimeout(() => greet("Dhanush"), 2000); // runs after 2 seconds
+
+  </script>
+</body>
+</html>
