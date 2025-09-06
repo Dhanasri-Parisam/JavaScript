@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optional Chaining in Js</title>
+</head>
+<body>
+  <p id="Oc">we are learning Optional Chaining in JS</p>
+
+  <script>
+    // Defining an object 'employee' with nested objects
+    let employee = {
+      id : 1,
+      name : 'Dhanu',
+      mail : 'hellodhanu@gmail.com',
+
+      personalStatus: {
+        name : 'Hello',
+        age : 19,
+        pincode : 533437,
+        
+        // nested object inside personalStatus
+        address : {
+          home : 'AKP',
+          phone : 123,
+          state : 'andhra'
+        }
+      }
+    }
+
+    // ❌ Wrong property name -> "addres" instead of "address"
+    // Without optional chaining, this would throw: "Cannot read property 'state' of undefined"
+    // With optional chaining, it safely returns "undefined"
+    console.log(employee.addres?.state);  
+
+    // ✅ Correct property, works normally
+    // This does not depend on previous error; execution continues
+    console.log(employee.personalStatus.age);  // Output: 19
+
+    // ✅ Accessing nested object normally (without ?)
+    // Since "personalStatus.address" exists, this works fine
+    console.log(employee.personalStatus.address.phone); // Output: 123
+
+    // ❌ Trying to access a property that doesn't exist ("one")
+    // Optional chaining prevents error and returns undefined instead
+    console.log(employee?.personalStatus?.address?.phone?.one); // Output: undefined
+
+    // ❌ Accessing an element with id="two" (which does not exist in HTML)
+    // Normally document.getElementById("two") returns null
+    // If we write null.innerText, it will throw error
+    // With optional chaining: null?.innerText -> safely returns undefined
+    let p = document.getElementById("two")?.innerText;
+    console.log(p); // Output: undefined
+
+    // ✅ Normal log
+    console.log("hello");
+
+    /*
+      -------------------------
+      📌 NOTES ON OPTIONAL CHAINING (?.)
+      -------------------------
+      1. Optional chaining is used to safely access nested object properties
+         without throwing errors when some properties are missing.
+
+      2. Syntax: 
+         object?.property
+         object?.[key]
+         object?.method?.()
+
+      3. It returns:
+         - The value if property exists
+         - "undefined" if property does not exist
+
+      4. It avoids runtime errors like:
+         "Cannot read property 'x' of undefined"
+
+      5. Best use cases:
+         - Deeply nested objects
+         - API responses where data may be missing
+         - DOM elements that may not exist in HTML
+    */
+  </script>
+</body>
+</html>
