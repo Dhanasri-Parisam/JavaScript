@@ -97,23 +97,29 @@
     // ===================================================
 
     // Example 5: Callback Hell (nested callbacks)
-    let p = document.getElementById("callstackP");
+    // Simple callback hell example: changing text after delays
+    let h1 = document.getElementById("callstackh1");
 
-    function ChangeColor(color, delay, nextChangeCol) {
+    setTimeout(() => {
+      h1.textContent = "Step 1";
       setTimeout(() => {
-        p.style.color = color;
-        if (nextChangeCol) nextChangeCol();
-      }, delay);
-    }
+      h1.textContent = "Step 2";
+      setTimeout(() => {
+        h1.textContent = "Step 3";
+      }, 1000);
+      }, 1000);
+    }, 1000);
 
-    // Nested callbacks → "Callback Hell"
-    ChangeColor("green", 3000, () => {
-      ChangeColor("red", 5000, () => {
-        ChangeColor("yellow", 2000, () => {
-          ChangeColor("pink", 1000);
-        });
-      });
-    });
+    // Another simple callback hell: logging numbers in sequence
+    setTimeout(() => {
+      console.log("1");
+      setTimeout(() => {
+      console.log("2");
+      setTimeout(() => {
+        console.log("3");
+      }, 500);
+      }, 500);
+    }, 500);
 
     // ===================================================
     // 📌 Summary Notes:

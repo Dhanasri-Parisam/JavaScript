@@ -56,6 +56,24 @@
     // ✅ Normal log
     console.log("hello");
 
+    // difference between syncronous and asynchronous code
+
+    // syncronous is basically line by line execution
+    name();
+    console.log("second name");
+    function name() {
+      console.log("first name");
+    }
+    console.log("third name");
+
+    // asynchronous is basically non blocking code execution
+    // remains in waiting state for some time and then executes
+    console.log("hello1");
+    setTimeout(() => {
+      console.log("hello2");
+    }, 2000);
+    console.log("hello3");
+
     /*
       -------------------------
       📌 NOTES ON OPTIONAL CHAINING (?.)
