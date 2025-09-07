@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Object in JS</title>
+</head>
+
+<body>
+  <script>
+    // -------------------------------
+    // Normal constructor example
+    // -------------------------------
+    function test() {
+      this.name = "xyz"; // property inside constructor
+    }
+
+    t1 = new test(); 
+    console.log(t1); // Output: test { name: "xyz" }
+
+    // -------------------------------
+    // Date Constructors
+    // -------------------------------
+    let d1 = new Date(); // Current date & time
+    console.log(d1);
+
+    let d2 = new Date(10000); 
+    // Parameter = milliseconds since Jan 1, 1970 (epoch)
+    // 1000 ms = 1 sec → 10000 ms = 10 sec
+    console.log(d2); // Thu Jan 01 1970 05:30:10 (for IST)
+
+    let d3 = new Date(24 * 60 * 60 * 1000); 
+    // 1 day = 24 hrs × 60 min × 60 sec × 1000 ms
+    // → Date = Jan 02, 1970
+    console.log(d3);
+
+    let beforeday = new Date(-24 * 60 * 60 * 1000);
+    // Negative value = 1 day before Jan 1, 1970
+    console.log(beforeday); // Wed Dec 31 1969
+
+    let d4 = new Date('2025-09-07'); 
+    // Date from string (YYYY-MM-DD format)
+    console.log(d4);
+
+    let d5 = new Date('09-05-2025'); 
+    // US format (MM-DD-YYYY)
+    console.log(d5);
+
+    let d6 = new Date(2025, 8, 7);
+    // Format: new Date(year, monthIndex, day)
+    // monthIndex starts at 0 → 8 = September
+    console.log(d6); // Sun Sep 07 2025
+
+    let d7 = new Date(2025, 11, 1, 5, 30, 40);
+    // Parameters: year, monthIndex, day, hour, min, sec
+    // monthIndex = 11 → December
+    console.log(d7); // Mon Dec 01 2025 05:30:40
+
+    let d8 = new Date(2025, 12, 1, 5, 30, 40);
+    // Month = 12 → Moves to Jan of next year (2026)
+    console.log(d8);
+
+    // -------------------------------
+    // Date Methods (Getters)
+    // -------------------------------
+    let d9 = new Date();
+    console.log(d9.getTime()); // Milliseconds since 1970 to now
+    console.log(Date.now());   // Same as above
+
+    console.log(d9.getFullYear());  // e.g., 2025
+    console.log(d9.getMonth());     // 0-11 (Sep → 8)
+    console.log(d9.getDate());      // Day of month (1-31)
+    console.log(d9.getDay());       // Day of week (0=Sun ... 6=Sat)
+    console.log(d9.getHours());     // Hours (0-23)
+    console.log(d9.getMinutes());   // Minutes (0-59)
+    console.log(d9.getSeconds());   // Seconds (0-59)
+    console.log(d9.getMilliseconds()); // Milliseconds (0-999)
+
+    console.log(d9.toLocaleString());     // Local date + time string
+    console.log(d9.toLocaleDateString()); // Local date only
+    console.log(d9.toDateString());       // Human-readable date
+    console.log(d9.toTimeString());       // Time string only
+
+    // -------------------------------
+    // Custom month names using array
+    // -------------------------------
+    let months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
+                  'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+    console.log(months[d9.getMonth()]); // Get month name
+
+    // -------------------------------
+    // Date Methods (Setters)
+    // -------------------------------
+    console.log(d9.setFullYear(2023)); // Changes year to 2023
+    console.log(d9.setMonth(0));       // 0 = January
+    console.log(d9.setDate(1));        // Sets date to 1st
+    console.log(d9.setHours(5));       // Sets hours to 5
+    console.log(d9.setMinutes(30));    // Sets minutes to 30
+    console.log(d9.setSeconds(20));    // Sets seconds to 20
+    console.log(d9.setMilliseconds(1000)); // Sets ms (note: 1000 ms = 1 sec → adds 1 sec)
+
+    console.log(d9.toLocaleString()); // Final formatted date & time after changes
+  </script>
+</body>
+
+</html>
