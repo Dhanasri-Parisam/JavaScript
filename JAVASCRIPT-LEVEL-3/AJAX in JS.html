@@ -1,0 +1,188 @@
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>AJAX in JS</title> 
+</head> 
+
+<style> 
+  body { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    text-align: center; 
+    margin-top: 50px; 
+  } 
+  .button { 
+    background-color: blue; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-bottom: 20px; 
+  } 
+</style> 
+
+<body> 
+  <input type="submit" class="button" id="special" value="Get Data"> 
+  <div id="dataid"></div> 
+  <button id="btn">ok</button> 
+
+  <script> 
+    // important thing 
+    let jsonStr = '{"Name":"india","capital":"new India","prime minister":"modi Ji","population":"130cr"}'; 
+    let obj = JSON.parse(jsonStr); 
+    console.log(obj); 
+    // Output: {Name: 'india', capital: 'new India', prime minister: 'modi Ji', population: '130cr'} 
+
+    console.log(jsonStr); 
+    // Output : {"Name":"india","capital":"new India","prime minister":"modi Ji","population":"130cr"} 
+
+    /*-------------------------------------------------------------------------------------------------------------
+    AJAX -> Asynchronous JavaScript and XML 
+    . AJAX helps in fetching data Asynchronous from a remote webserver without reloading the web page.
+    . Data loaded by AJAX calls is done asynchronously with out page refresh.
+    . webserver will send the Response which contains data that we have requested.
+    . Data can be in XML, JSON, HTML or text format.
+    . AJAX is not a programming language, it is a technique for accessing web servers from a web page.
+    . AJAX uses a combination of:
+        - A browser built-in XMLHttpRequest object (to request data from a web server)
+        - JavaScript and HTML DOM (to display or use the data)
+    . AJAX is used to create dynamic and fast web applications.
+    . Initially server used to send the data in XML format 
+    -------------------------------------------------------------------------------------------------------------------*/ 
+
+    // Example basic AJAX request (commented for learning):
+    // let btn = document.getElementById("special"); 
+    // let data = document.getElementById("data"); 
+    // btn.addEventListener('click', loadData) 
+
+    // function loadData() { 
+    //   let xhr = new XMLHttpRequest(); 
+    //   // Open a GET request 
+    //   xhr.open('GET', 'test.txt', true); 
+    //   // Show loading text while fetching 
+    //   xhr.onprogress = function () { 
+    //     data.innerHTML = "Loading..."; 
+    //   }; 
+    //   // When request is complete 
+    //   xhr.onload = function () { 
+    //     if (xhr.status === 200) { 
+    //       data.innerText = xhr.responseText; // ✅ Use responseText for plain text 
+    //     } else { 
+    //       data.innerText = "Error: " + xhr.status; 
+    //     } 
+    //   }; 
+    //   xhr.send(); // Send the request 
+    // } 
+
+    /* 
+    Method Description =>
+      newXMLHttpRequest() -> creates a new XMLHttpRequest object.
+      open(method, url, async, user, password) -> method is the type of request GET or POST, url is the file location, 
+                                                  async is true or false for asynchronous or synchronous request,
+                                                  user and password are optional parameters for authentication.
+      send() -> sends the request to the server.
+      send(string) -> sends the request to the server with a string as a parameter.
+      abort() -> aborts the request. (cancels the request)
+      getAllResponseHeaders() -> returns all the response headers as a string.
+      getResponseHeader(header) -> returns the string containing the text of the specified header.
+      setRequestHeader(header, value) -> sets the value of a request header.
+    */ 
+
+    /* 
+    Properties Description =>
+      onload -> a function to be called when the request is completed successfully.
+      onreadystatechange -> a function to be called when the readyState property changes.
+      onprogress -> a function to be called periodically(trigger) while the request is being processed.
+
+      readyState -> returns the state of the request(XMLHttpRequest). (0-4)
+        0 -> request not initialized
+        1 -> server connection established
+        2 -> request received
+        3 -> processing request
+        4 -> request finished and response is ready
+
+      responseText -> returns the response data as a string.
+      responseXML -> returns the response data as XML data.
+      status -> returns the status-number of a request. (200, 404, etc..)
+      statusText -> returns the status-text of a request. (OK, Not Found, etc..)
+      timeout -> sets a time limit (in milliseconds) for the request.
+    */ 
+
+    // Example loading JSON file (commented for now):
+    // function loadData() { 
+    //   // Create a new XMLHttpRequest object 
+    //   let xhr = new XMLHttpRequest(); 
+    //   // request creation 
+    //   xhr.open('GET','Country.json',true); 
+    //   //send the request to the server 
+    //   xhr.send(); 
+    //   xhr.onload = function(){ 
+    //     if(xhr.status == 200){ 
+    //       let jsonstr = xhr.responseText; 
+    //       jsonstr = JSON.parse(jsonstr); 
+    //       console.log(jsonstr); 
+    //       let str = <table border="2" style="padding:5px; margin:5px; background-color : lightblue; cursor : ;"><tr> 
+    //       for(key in jsonstr){ 
+    //         str += <th>${key}</th> 
+    //       } 
+    //       str = str + </tr> 
+    //       for(key in jsonstr){ 
+    //         str += <td>${jsonstr[key]}</td> 
+    //       } 
+    //       str += </tr></table> 
+    //       data.innerHTML = str; 
+    //     } 
+    //     else{ 
+    //       data.innerText = File Not Found ${xhr.status}; 
+    //       // output : AJAX in JS.html:128 GET http://127.0.0.1:5500/JAVASCRIPT-LEVEL-3/Countr.json 404 (Not Found) 
+    //     } 
+    //   } 
+    // } 
+
+    // Final working example using live API
+    let btn = document.getElementById("special");
+    let data = document.getElementById("dataid");
+
+    btn.addEventListener('click', helper);
+
+    function helper() {
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://restcountries.com/v3.1/currency/cop', true);
+
+      xhr.onprogress = function () {
+        data.innerText = "Loading...";
+      };
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          let res = JSON.parse(xhr.responseText);
+          // Display country names and capitals in a table
+          let str = `<table border="1" style="margin:10px; background-color:lightblue;">
+            <tr><th>Country</th><th>Capital</th></tr>`;
+          res.forEach(country => {
+            str += `<tr>
+              <td>${country.name.common}</td>
+              <td>${country.capital ? country.capital[0] : 'N/A'}</td>
+            </tr>`;
+          });
+          str += `</table>`;
+          data.innerHTML = str;
+        } else {
+          data.innerText = "Invalid Request";
+        }
+      };
+
+      xhr.onerror = function () {
+        data.innerText = "Network Error";
+      };
+
+      xhr.send();
+    }
+  </script> 
+</body> 
+</html>

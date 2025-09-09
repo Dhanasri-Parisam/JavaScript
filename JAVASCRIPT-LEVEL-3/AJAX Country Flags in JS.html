@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX in JS</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      margin-top: 50px;
+      font-family: Arial, sans-serif;
+    }
+
+    .button {
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    #country {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Input field to enter country name -->
+  <input type="text" id="country" placeholder="Enter country (e.g. India)">
+  
+  <!-- Button to fetch data -->
+  <input type="submit" class="button" id="special" value="Get Data">
+
+  <!-- Area where fetched data will be displayed -->
+  <div id="dataid"></div>
+
+  <script>
+    // Select button, result area, and input field
+    let btn = document.getElementById("special");
+    let data = document.getElementById("dataid");
+    let flag = document.getElementById("country");
+
+    // Add event listener to the button
+    btn.addEventListener('click', helper);
+
+    // Function to fetch country data
+    function helper() {
+      // Check if user entered a country name
+      if (flag.value) {
+        let url = `https://restcountries.com/v3.1/name/${flag.value}`;
+
+        // Create XMLHttpRequest object
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+
+        // Show loading message while waiting for response
+        data.innerHTML = "Loading...";
+
+        // Handle the response after data is loaded
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            let res = JSON.parse(xhr.responseText);
+
+            // Destructure first country object from the array
+            let [a] = res;
+
+            // Display country details
+            data.innerHTML = `
+              <h3>${a.name.common}</h3>
+              <p><b>Capital:</b> ${a.capital ? a.capital[0] : "N/A"}</p>
+              <p><b>Region:</b> ${a.region}</p>
+              <p><b>Population:</b> ${a.population.toLocaleString()}</p>
+              <img src="${a.flags.png}" style="width:200px; margin-top:10px;">
+            `;
+          } else {
+            // Show error if request fails
+            data.innerText = "Invalid Request: " + xhr.status;
+          }
+        };
+
+        // Handle network errors
+        xhr.onerror = function () {
+          data.innerText = "Network Error";
+        };
+
+        // Send the request
+        xhr.send();
+      } else {
+        // Show message if input is empty
+        data.innerText = "Please enter a country name";
+      }
+    }
+  </script>
+</body>
+
+</html>
