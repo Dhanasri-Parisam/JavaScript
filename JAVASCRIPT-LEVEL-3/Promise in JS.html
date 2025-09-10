@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise in JS</title>
+</head>
+<style>
+  /* Styling for the page */
+  body { 
+    display: flex;               /* Centers elements horizontally */
+    justify-content: center;     /* Aligns items at the center horizontally */
+    align-items: center;         /* Aligns items at the center vertically */
+    flex-direction: column;      /* Stacks elements vertically */
+    text-align: center; 
+    margin-top: 50px; 
+  } 
+
+  /* Styling for the button */
+  .button { 
+    background-color: blue; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-bottom: 20px; 
+  }
+</style>
+<body>
+  <!-- Button to trigger data fetching -->
+  <input type="submit" class="button" id="special" value="Get Data"> 
+
+  <!-- Div where data will be displayed -->
+  <div id="dataid"></div>
+
+  <script>
+
+    /*-------------------------------------------------------------------------------------------------------------
+      PROMISE IN JAVASCRIPT
+      - A Promise represents the result of an asynchronous operation (something that takes time, e.g., fetching data).
+      - States of Promise:
+        1. Pending   -> Initial state, operation not completed yet.
+        2. Fulfilled -> Operation completed successfully (resolved).
+        3. Rejected  -> Operation failed with an error.
+      - Once fulfilled or rejected, the promise is called "settled".
+      - Methods:
+        .then()     -> Handles success (fulfilled state).
+        .catch()    -> Handles errors (rejected state).
+        .finally()  -> Runs after promise is settled (regardless of success or failure).
+    -------------------------------------------------------------------------------------------------------------*/
+
+
+    /*----------------------------------
+      CALLBACK FUNCTION EXAMPLE
+    ----------------------------------*/
+
+    // A callback function is passed into another function to be executed later.
+    function fetchData(callback) { 
+      // Simulating a delay using setTimeout (like waiting for server response)
+      setTimeout(() => {
+        const data = "Data fetched from server"; // Response data
+        callback(data); // Calling the callback function with data
+      }, 2000); // 2 seconds delay
+    }
+
+    function displayData(data) {
+      console.log(data); // Prints the data when available
+    }
+
+    // Using callback: After 2 seconds, "Data fetched from server" is printed
+    fetchData(displayData); 
+
+
+    /*----------------------------------
+      PROMISE EXAMPLE
+    ----------------------------------*/
+
+    // Creating a new Promise
+    let p = new Promise(function(success, error){
+      let outcome = true; // You can set it to false to test rejection
+
+      // Normally, outcome would depend on an async operation (like API success/failure)
+      if(outcome){
+        success("promise done");   // If success -> resolve with this message
+      } else {
+        error("promise not done"); // If error -> reject with this message
+      }
+    });
+
+    // Handling promise fulfillment
+    p.then(function(outcomeData){
+      console.log(outcomeData); // Output: "promise done" if resolved
+    });
+
+    // Handling promise rejection
+    p.catch(function(outcomeData){
+      console.log(outcomeData); // Output: "promise not done" if rejected
+    });
+
+
+    /*----------------------------------
+      PROMISE WITH PENDING STATE
+    ----------------------------------*/
+
+    // Example where the promise stays pending for 2 seconds before resolving/rejecting
+    /*
+    let p1 = new Promise(function(success, error){
+      let outcome = true; 
+
+      setTimeout(() => {
+        if(outcome){
+          success("promise done after delay");
+        } else {
+          error("promise failed after delay");
+        }
+      }, 2000);
+    });
+
+    console.log(p1); // Initially shows: Promise {<pending>}
+                     // After 2s -> Promise gets fulfilled/rejected
+    */
+
+
+    /*----------------------------------
+      AJAX EXAMPLE USING PROMISE
+    ----------------------------------*/
+
+    // Selecting button and output container
+    let btn1 = document.getElementById("special");
+    let data1 = document.getElementById("dataid");
+
+    // Adding click event listener on button
+    btn1.addEventListener('click', function(){
+
+      // Wrapping AJAX call inside a Promise
+      let p = new Promise(function(success, error){
+        let xhr = new XMLHttpRequest(); // Create XHR object
+        xhr.open('GET','test.txt',true); // Request test.txt (asynchronous GET request)
+
+        // onload runs when server responds
+        xhr.onload = function(){
+          if(xhr.status == 200){ // Status 200 = success
+            success(xhr.responseText); // Resolve promise with response text
+          }
+          else{
+            error("File Not Found"); // Reject promise with error
+          }
+        }
+        xhr.send(); // Send request
+      });
+
+      // Handling promise resolution (success case)
+      p.then(function(data){
+        data1.innerHTML = data; // Display server data inside <div>
+      })
+      // Handling promise rejection (error case)
+      .catch(function(err){
+        data1.innerHTML = err; // Display error message inside <div>
+      });
+
+    });
+
+  </script>
+</body>
+</html>
