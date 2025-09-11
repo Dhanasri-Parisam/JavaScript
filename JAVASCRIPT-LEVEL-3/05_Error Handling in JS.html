@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Handling in JS</title>
+</head>
+
+<body>
+  <script>
+    // -------------------------------------------------
+    // 🔹 Error Handling in JavaScript
+    // -------------------------------------------------
+    // 1. throw → Used to create and throw custom errors.
+    // 2. try...catch → Used to handle errors gracefully.
+    // 3. finally → Always executes after try/catch (cleanup code).
+    //
+    // Main purpose: Prevents the program from crashing
+    // and gives a way to handle unexpected situations.
+
+    // -------------------------------------------------
+    // Example 1: Using try...catch with a built-in error
+    // -------------------------------------------------
+    try {
+      console.log("line1");
+      console.log(line2); // ❌ line2 is not defined → ReferenceError
+      console.log("line3"); // ❌ This line will not run
+    }
+    catch (error) {
+      console.log("Error object:", error);        // Full error object
+      console.log("Error name:", error.name);     // ReferenceError
+      console.log("Error message:", error.message); // line2 is not defined
+      console.log("An error occurred, but we handled it!");
+    }
+    console.log("Program continues after error.");
+    // ✅ Even though error happened, program didn’t crash.
+
+
+    // -------------------------------------------------
+    // Example 2: No error → catch not executed
+    // -------------------------------------------------
+    try {
+      console.log(5 > 31); // Output: false (no error)
+    }
+    catch (error) {
+      console.log("This will not run, since no error.");
+    }
+    console.log("Code keeps running normally."); // ✅
+
+
+    // -------------------------------------------------
+    // Example 3: Throwing a custom error
+    // -------------------------------------------------
+    function checkAge(age) {
+      if (age > 18) {
+        // Custom error
+        throw new Error("Age must be at least 18.");
+      }
+      return "Access granted."; // Runs only if no error
+    }
+
+    try {
+      console.log(checkAge(20)); 
+      // ❌ Error thrown, so return never runs
+    } catch (error) {
+      console.log("Error name:", error.name);     // Error
+      console.log("Error message:", error.message); // Age must be at least 18.
+    }
+
+
+    // -------------------------------------------------
+    // Example 4: Division with error handling
+    // -------------------------------------------------
+    function divide(a, b) {
+      if (b === 0) {
+        throw new Error("Division by zero is not allowed.");
+      }
+      return a / b;
+    }
+
+    try {
+      console.log(divide(10, 0)); 
+      // ❌ Error thrown → goes to catch
+    } catch (error) {
+      console.log("Error caught:", error.message); 
+      // Division by zero is not allowed.
+    }
+
+    // -------------------------------------------------
+    // Example 5: Using finally
+    // -------------------------------------------------
+    try {
+      console.log("Start process...");
+      throw new Error("Something went wrong!");
+    } catch (error) {
+      console.log("Caught:", error.message);
+    } finally {
+      console.log("This will always run (cleanup).");
+    }
+    // Output:
+    // Start process...
+    // Caught: Something went wrong!
+    // This will always run (cleanup)
+
+  </script>
+</body>
+
+</html>
