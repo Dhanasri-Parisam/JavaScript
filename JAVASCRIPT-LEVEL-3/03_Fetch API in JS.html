@@ -156,6 +156,16 @@
       .then((response) => response.json())
       .then((json) => console.log(json));
 
+    /*
+        // conclusion
+        console.log(response) shows the Response object (metadata like status, headers, body stream) → not the actual data.
+        response.json() converts that body into usable JavaScript objects/arrays.
+        API can return:
+        Array(n) → multiple items (list of objects).
+        Object {…} → a single resource.
+        [[Prototype]] is just Chrome’s way of showing inheritance, not actual data.
+    */
+
   </script>
 </body>
 
