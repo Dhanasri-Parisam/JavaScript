@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destructuring in JavaScript</title>
+</head>
+<body>
+  <script>
+    // -------------------------------------------------
+    // 🔹 Destructuring in JavaScript
+    // -------------------------------------------------
+    // Destructuring = Unpacking values from arrays/objects 
+    // into separate variables in a simple, readable way.
+
+    // -------------------------------------------------
+    // Example 1: Array Destructuring
+    // -------------------------------------------------
+    const rgb = [255, 200, 100];
+
+    // ✅ Traditional way (without destructuring)
+    const red1 = rgb[0];
+    const green1 = rgb[1];
+    const blue1 = rgb[2];
+    console.log(red1, green1, blue1); // Output: 255 200 100
+
+    // ✅ Using array destructuring
+    const [red2, green2, blue2] = rgb;
+    console.log(red2, green2, blue2); // Output: 255 200 100
+
+    // ✅ Skipping elements
+    const [r, , b] = rgb; // Skipping green value
+    console.log(r, b); // Output: 255 100
+
+    // ✅ Default values
+    // If value is missing in array, default is used
+    const [x = 0, y = 0, z = 0, alpha = 1] = rgb;
+    console.log(x, y, z, alpha); // Output: 255 200 100 1
+
+
+    // -------------------------------------------------
+    // Example 2: Object Destructuring
+    // -------------------------------------------------
+    let person = {
+      name: "Alice",
+      age: 30,
+      city: "New York",
+      address: {
+        city: "Hyderabad",
+        state: "Telangana"
+      }
+    };
+
+    // ✅ Extracting properties
+    let { name, age, city } = person;
+    console.log(name, age, city); // Output: Alice 30 New York
+
+
+    // -------------------------------------------------
+    // Example 3: Rest operator with arrays
+    // -------------------------------------------------
+    let arr = [10, 20, 30, 40, 50];
+    let [a, b, ...rest] = arr; 
+    // a = 10, b = 20, rest = remaining values
+    console.log(a, b);   // Output: 10 20
+    console.log(rest);   // Output: [30, 40, 50]
+
+
+    // -------------------------------------------------
+    // Example 4: Nested Object Destructuring
+    // -------------------------------------------------
+    let person1 = {
+      name: "Alice",
+      age: 30,
+      city: "New York",
+      address: {
+        city: "Hyderabad",
+        state: "Telangana"
+      }
+    };
+
+    // Extract nested property (address.city)
+    let { name1, age1, address: { city: cityName } } = person1;
+    // renamed `city` from inside address → cityName
+    console.log(name1, age1, cityName); // Output: undefined  undefined Hyderabad
+    // (Note: name1 & age1 are undefined because in object, keys are name & age, not name1 & age1)
+
+
+    // -------------------------------------------------
+    // Example 5: Aliases (renaming variables)
+    // -------------------------------------------------
+    let { name: fullName, age: years } = person1;
+    // "name" is stored in "fullName", "age" in "years"
+    console.log(fullName, years); // Output: Alice 30
+
+    // -------------------------------------------------
+    // 📘 Summary Notes:
+    // -------------------------------------------------
+    // 1. Array destructuring → [a, b] = array
+    // 2. Skip values with commas → [a, , b]
+    // 3. Default values → [a = 1]
+    // 4. Object destructuring → {key} = object
+    // 5. Nested destructuring → {address: {city}}
+    // 6. Aliases → {key: newName}
+    // 7. Rest (...) → collects remaining values
+  </script>
+</body>
+</html>
