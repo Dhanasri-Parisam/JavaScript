@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regular Expressions in JS</title>
+</head>
+<body>
+  <h1>Regular Expressions in JavaScript</h1>
+  <script>
+    // Regular Expression is a sequence of characters that forms a search pattern.
+    // It is used for pattern matching within strings.
+    // Creating a Regular Expression
+    // 1. Using RegExp constructor
+    const regex1 = new RegExp('abc');
+    console.log(regex1); // Output: /abc/
+
+    // 2. Using literal syntax
+    const regex2 = /abc/;
+    console.log(regex2); // Output: /abc/
+
+    // Flags in Regular Expressions
+    // g - global search
+    // i - case-insensitive search
+    // m - multi-line search
+    const regex3 = /abc/gi;
+    console.log(regex3); // Output: /abc/gi
+    
+    // test() -> search match return true
+    let re  = /hello/i     // i -> case sensitive "H" , "h" treated same
+    let res = re.test("Hello")
+    console.log(res);
+
+    let res1 = /^[A-Z]{10}$/i
+    let ans = res1.test("FABCDEFGHJ")
+    console.log(ans); // true
+
+    let name = /ali/
+    let find = name.test("falice in a borderland")
+    console.log(find); // output: true
+
+    let name1 = /^ali/
+    let find1 = name1.test("falice in a borderland")
+    console.log(find1); // output: false
+
+    let x = "hello"
+    let y = /${x}/
+    console.log(y.test("hello")); // output: true
+    console.log(y.test("Hello")); // output: false
+
+    // use cases of g
+    let str = "hello hello hello is hello"
+    let re1 = /hello/g
+    let res2 = str.match(re1)
+    console.log(res2); // output: [ 'hello', 'hello', 'hello', 'hello' ]
+    // global search is used to find all the occurrences of a pattern in a string.
+
+
+    // use cases of m
+    let str1 = `hello
+    hello
+    hello`
+    let re2 = /^hello/gm
+    let res3 = str1.match(re2)
+    console.log(res3); // output: ['hello']
+    // multi line search is used to find the pattern in multiple lines.
+
+    // exec() -> search match return array
+    let re3 = /hello/
+    let res4 = re3.exec("Hello i'm hello")
+    console.log(res4); // output: [ 'hello', index: 10, input: "Hello i'm hello", groups: undefined ]
+    console.log(res4.index); // output: 10
+    console.log(res4.input); // output: Hello i'm hello
+
+
+  </script>
+</body>
+</html>
