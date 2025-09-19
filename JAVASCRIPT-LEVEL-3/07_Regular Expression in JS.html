@@ -24,7 +24,7 @@
     // i - case-insensitive search
     // m - multi-line search
     const regex3 = /abc/gi;
-    console.log(regex3); // Output: /abc/gi
+    console.log(regex3); // Output: /abc/gi what gloabal search do is it will search all the occurences of the pattern in the string
     
     // test() -> search match return true
     let re  = /hello/i     // i -> case sensitive "H" , "h" treated same
@@ -45,6 +45,8 @@
 
     let x = "hello"
     let y = /${x}/
+    // what will happens here is that it will search for the pattern "x" in the string "hello"
+
     console.log(y.test("hello")); // output: true
     console.log(y.test("Hello")); // output: false
 
@@ -54,7 +56,7 @@
     let res2 = str.match(re1)
     console.log(res2); // output: [ 'hello', 'hello', 'hello', 'hello' ]
     // global search is used to find all the occurrences of a pattern in a string.
-
+    // what is the diff between match and exec -> match returns an array of all matches, while exec returns an array for the first match it finds.
 
     // use cases of m
     let str1 = `hello
@@ -65,7 +67,7 @@
     console.log(res3); // output: ['hello']
     // multi line search is used to find the pattern in multiple lines.
 
-    // exec() -> search match return array
+    // exec() -> search match return array or null
     let re3 = /hello/
     let res4 = re3.exec("Hello i'm hello")
     console.log(res4); // output: [ 'hello', index: 10, input: "Hello i'm hello", groups: undefined ]
