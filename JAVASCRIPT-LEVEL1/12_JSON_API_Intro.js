@@ -115,3 +115,32 @@ const apiResponse = {
 
 console.log(apiResponse.results[0].name.first); // Jennie
 console.log(apiResponse.info.results); // 1
+
+// Async API call using fetch
+
+async function fetchUserData() {
+    let data = await fetch('test.json'); // Replace with actual API endpoint
+    let parsedData = await data.json(); // Convert JSON string to JS object
+    console.log(parsedData);
+}
+
+json.stringify(course); // Convert JS Array of object to JSON string
+
+fetchUserData();
+
+// output will be the entire JSON object from test.json file
+// Example of output:
+/*
+{
+    "results": [
+        { ... }
+    ],
+    "info": {
+        "seed": "56d27f4a53bd5441",
+        "results": 1,
+        "page": 1,
+        "version": "1.4"
+    }
+}
+*/
+
