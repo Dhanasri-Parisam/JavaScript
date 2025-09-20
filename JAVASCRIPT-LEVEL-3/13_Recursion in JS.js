@@ -47,7 +47,7 @@ console.log(sumArray([1, 2, 3, 4, 5])); // Output: 15
 // Recursive functions can be elegant and concise, but they may also lead to performance issues if not used carefully (e.g., deep recursion causing stack overflow).
 // Always ensure that the base case is reachable and that the recursive calls progress towards it.
 
-// Common Mistakes:
+// Common Mistakes
 // ❌ Missing base case → leads to infinite recursion
 // ❌ Incorrect base case → may produce wrong results
 // ❌ Not progressing towards base case → infinite recursion
