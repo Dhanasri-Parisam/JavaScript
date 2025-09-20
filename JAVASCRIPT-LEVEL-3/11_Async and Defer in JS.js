@@ -99,5 +99,4 @@ console.log("Async Script executed as soon as it downloaded (order not guarantee
 ❌ Using async when scripts depend on DOM → may break
 ❌ Expecting async scripts to maintain order → they don’t
 ❌ Forgetting that defer scripts wait until DOM is parsed
-*/
-/************************************************************************/
+**********************************************************************/
