@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regular Expression Notations</title>
 </head>
+
 <body>
     <script>
         /* some of the regular expression notations in JS
@@ -42,7 +44,7 @@
 
         let reg = /[a89]/
         console.log(reg.test('a'))  // true
-        
+
         let reg2 = /[^a89]/
         console.log(reg2.test('a'))  // false
 
@@ -115,7 +117,7 @@
         console.log(reg13.test('colou'))      // output : false
         console.log(reg13.test('colour'))      // true
 
-        
+
         /*
         Meta characters in Regular Expressions
         -----------------------------------------
@@ -146,10 +148,10 @@
         let reg15 = /a$/
         console.log(reg15.test('cba'))         // true
 
-        let reg16 = /a.b/  
+        let reg16 = /a.b/
         console.log(reg16.test('ab'))          // false
 
-        let reg17 = /a.b/    
+        let reg17 = /a.b/
         console.log(reg17.test('aXb'))         // true
 
         let reg18 = /\d/      //  -- > [0-9]
@@ -183,4 +185,5 @@
 
     </script>
 </body>
+
 </html>

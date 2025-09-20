@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excution context in JS</title>
+</head>
+<body>
+  <script>
+    /*******************************************************
+     🔹 Execution Context in JavaScript
+     
+     Execution Context is the environment where JavaScript code runs.
+     It contains all the information needed to execute code:
+     - Variables
+     - Functions
+     - 'this' keyword
+     - Scope chain
+    *******************************************************/
+
+    console.log("=== EXECUTION CONTEXT DEMONSTRATION ===");
+
+    /*******************************************************
+     🔹 PART 1: Global Execution Context (GEC)
+    *******************************************************/
+    
+    // This code runs in Global Execution Context
+    console.log("\n--- Global Execution Context ---");
+    
+    // During CREATION PHASE: variables are hoisted and set to undefined
+    console.log("a before declaration:", a); // undefined (not error due to hoisting)
+    
+    var a = 10; // Variable declaration and assignment
+    
+    // During EXECUTION PHASE: variables get actual values
+    console.log("a after assignment:", a); // 10
+    
+    // Function declarations are fully hoisted
+    console.log("Calling hoisted function:", greet()); // Works! Returns "Hello World"
+    
+    function greet() {
+      return "Hello World";
+    }
+    
+    // 'this' in Global Context
+    console.log("'this' in global context:", this); // window object (in browser)
+
+    /*******************************************************
+     🔹 PART 2: Function Execution Context (FEC)
+    *******************************************************/
+    
+    console.log("\n--- Function Execution Context ---");
+    
+    // Each function call creates its own Execution Context
+    function calculateSum(x, y) {
+      console.log("Inside calculateSum - 'this':", this); // window object (regular function)
+      
+      // Local variables exist only in this function's context
+      var result = x + y;
+      var message = "Sum calculated";
+      
+      console.log("Local variable 'result':", result);
+      console.log("Local variable 'message':", message);
+      
+      return result;
+    }
+    
+    var total = calculateSum(5, 7);
+    console.log("Returned value:", total);
+    
+    // Try to access local variables from global context (will cause error)
+    try {
+      console.log(result); // ReferenceError: result is not defined
+    } catch (error) {
+      console.log("Error accessing local variable:", error.message);
+    }
+
+    /*
+      --- Function Execution Context ---
+          Inside calculateSum - 'this': [object Window]
+          Local variable 'result': 12
+          Local variable 'message': Sum calculated
+          Returned value: 12
+          Error accessing local variable: result is not defined
+    */
+
+    /*******************************************************
+     🔹 PART 3: Execution Stack (Call Stack) Demo
+    *******************************************************/
+    
+    console.log("\n--- Call Stack Demonstration ---");
+    
+    function first() {
+      console.log("1. Inside first() function");
+      second(); // Calls second function
+      console.log("5. Back in first() function");
+    }
+    
+    function second() {
+      console.log("2. Inside second() function");
+      third(); // Calls third function
+      console.log("4. Back in second() function");
+    }
+    
+    function third() {
+      console.log("3. Inside third() function");
+      // This function will finish and be popped from stack
+    }
+    
+    console.log("Starting call stack demo...");
+    first(); // This pushes first() onto the stack
+    console.log("6. Back in global context");
+    
+    /*
+    Call Stack visualization:
+    
+    Step 1: [Global Context]
+    Step 2: [Global Context] -> [first()]
+    Step 3: [Global Context] -> [first()] -> [second()]
+    Step 4: [Global Context] -> [first()] -> [second()] -> [third()]
+    Step 5: [Global Context] -> [first()] -> [second()] (third popped)
+    Step 6: [Global Context] -> [first()] (second popped)
+    Step 7: [Global Context] (first popped)
+    */
+
+    /*******************************************************
+     🔹 PART 4: Hoisting in Detail
+    *******************************************************/
+    
+    console.log("\n--- Hoisting Demonstration ---");
+    
+    // Variable hoisting
+    console.log("b before declaration:", b); // undefined
+    var b = 20;
+    console.log("b after assignment:", b); // 20
+    
+    // Function hoisting
+    console.log("Hoisted function result:", multiply(3, 4)); // 12
+    
+    function multiply(a, b) {
+      return a * b;
+    }
+    
+    // Function expressions are NOT fully hoisted
+    try {
+      console.log(divide(10, 2)); // TypeError: divide is not a function
+    } catch (error) {
+      console.log("Function expression error:", error.message);
+    }
+    
+    var divide = function(a, b) {
+      return a / b;
+    };
+    
+    console.log("Function expression after definition:", divide(10, 2)); // 5
+
+    /*******************************************************
+     🔹 PART 5: Scope Chain and Lexical Environment
+    *******************************************************/
+    
+    console.log("\n--- Scope Chain Demonstration ---");
+    
+    var globalVar = "I'm global";
+    
+    function outerFunction() {
+      var outerVar = "I'm in outer function";
+      
+      function innerFunction() {
+      var innerVar = "I'm in inner function";
+      
+      // Inner function can access variables from outer scopes
+      console.log("From inner - globalVar:", globalVar);
+      console.log("From inner - outerVar:", outerVar);
+      console.log("From inner - innerVar:", innerVar);
+      }
+      
+      innerFunction();
+      
+      // Outer function cannot access inner function's variables
+      try {
+      console.log(innerVar); // ReferenceError
+      } catch (error) {
+      console.log("Scope error:", error.message);
+      }
+    }
+    
+    outerFunction();
+
+  /*
+  Output:
+  --- Scope Chain Demonstration ---
+  From inner - globalVar: I'm global
+  From inner - outerVar: I'm in outer function
+  From inner - innerVar: I'm in inner function
+  Scope error: innerVar is not defined
+  */
+
+    /*******************************************************
+     🔹 PART 6: 'this' Keyword in Different Contexts
+    *******************************************************/
+    
+    console.log("\n--- 'this' Keyword Demonstration ---");
+    
+    // Global context
+    console.log("Global 'this':", this);
+    
+    // Regular function
+    function regularFunction() {
+      console.log("Regular function 'this':", this); // window object
+    }
+    regularFunction();
+    
+    // Object method
+    var person = {
+      name: "John",
+      greet: function() {
+        console.log("Object method 'this':", this); // person object
+        console.log("Hello, I'm", this.name);
+      }
+    };
+    person.greet();
+    
+    // Arrow function (inherits 'this' from surrounding context)
+    var arrow = () => {
+      console.log("Arrow function 'this':", this); // same as global 'this'
+    };
+    arrow();
+
+    /*******************************************************
+     🔹 PART 7: Practical Example - Step by Step Execution
+    *******************************************************/
+    
+    console.log("\n--- Step by Step Execution Example ---");
+    
+    // Step 1: Global Execution Context created
+    console.log("Step 1: Global EC created");
+    
+    var userName = "Alice"; // Step 2: Variable assigned
+    console.log("Step 2: userName =", userName);
+    
+    function processUser(name, age) {
+      // Step 4: Function Execution Context created
+      console.log("Step 4: Function EC created for processUser");
+      
+      var userInfo = `Name: ${name}, Age: ${age}`; // Step 5: Local variable
+      console.log("Step 5: userInfo =", userInfo);
+      
+      function displayInfo() {
+        // Step 6: Another Function EC created
+        console.log("Step 6: Function EC created for displayInfo");
+        console.log("Displaying:", userInfo); // Accessing outer scope
+        // Step 7: displayInfo EC destroyed
+      }
+      
+      displayInfo();
+      console.log("Step 8: Back in processUser");
+      return userInfo;
+      // Step 9: processUser EC destroyed
+    }
+    
+    console.log("Step 3: About to call processUser");
+    var result = processUser(userName, 25);
+    console.log("Step 10: Back in Global EC, result =", result);
+
+    /*******************************************************
+     🔹 SUMMARY NOTES:
+     
+     1. Global Execution Context is created when program starts
+     2. Function Execution Context is created for each function call
+     3. Hoisting moves declarations to the top during creation phase
+     4. Variables are undefined during creation, get values during execution
+     5. Call Stack manages execution contexts (LIFO - Last In, First Out)
+     6. Scope chain allows inner functions to access outer variables
+     7. 'this' value depends on how and where function is called
+     
+     Understanding Execution Context helps with:
+     - Debugging code
+     - Understanding hoisting
+     - Avoiding scope-related bugs
+     - Writing better, more predictable code
+    *******************************************************/
+
+  </script>
+</body>
+</html>
