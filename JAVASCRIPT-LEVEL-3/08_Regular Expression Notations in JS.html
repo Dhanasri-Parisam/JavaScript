@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Expression Notations</title>
+</head>
+<body>
+    <script>
+        /* some of the regular expression notations in JS
+        -----------------------------------------
+        Brackets in Regular Expressions
+        -----------------------------------------
+
+        [abc]      → Any one character between the brackets
+                    Example: [a89]  => matches a or 8 or 9
+        -----------------------------------------
+
+        [^abc]     → Any one character NOT between the brackets
+                    Example: [^a89] => matches everything except a, 8, and 9
+        -----------------------------------------
+
+        [0-9]      → Any digit from 0 to 9
+                    Example: matches 0, 1, 2 ... 9
+        -----------------------------------------
+
+        [a-z]      → Any lowercase alphabet
+                    Example: matches a, b, c ... z
+        -----------------------------------------
+
+        [A-Z]      → Any uppercase alphabet
+                    Example: matches A, B, C ... Z
+        -----------------------------------------
+
+        [a-zA-Z]   → Any lowercase or uppercase alphabet
+                    Example: matches a, b ... z, A, B ... Z
+        -----------------------------------------
+
+
+
+        */
+
+        let reg = /[a89]/
+        console.log(reg.test('a'))  // true
+        
+        let reg2 = /[^a89]/
+        console.log(reg2.test('a'))  // false
+
+        let reg3 = /[0-9]/
+        console.log(reg3.test('5'))  // true
+
+        let reg4 = /[a-z]/
+        console.log(reg4.test('g'))  // true
+
+        let reg5 = /[A-Z]/
+        console.log(reg5.test('G'))  // true
+
+        let reg6 = /[a-zA-Z]/
+        console.log(reg6.test('G'))  // true
+        console.log(reg6.test('g'))  // true
+        console.log(reg6.test('5'))  // false
+
+        /*
+         Quantifiers in Regular Expressions
+        -----------------------------------------
+        n+         → One or more occurrences of n
+                    Example: a+  => matches a, aa, aaa, aaaa ...
+        
+        n*         → Zero or more occurrences of n
+                    Example: a*  => matches "", a, aa, aaa, aaaa ...
+
+        n?         → Zero or one occurrence of n
+                    Example: a?  => matches "", a
+        
+        n{X}       → Exactly X occurrences of n
+                    Example: a{3} => matches aaa
+                  
+        n{X,Y}     → Between X and Y occurrences of n
+                    Example: a{2,4} => matches aa, aaa, aaaa
+                  
+        n{X,}      → X or more occurrences of n
+                    Example: a{3,} => matches aaa, aaaa, aaaaa ...
+
+        ?         → Zero or one occurrence of the preceding element
+                    Example: colou?r => matches color and colour
+        */
+
+        let reg7 = /a+/
+        console.log(reg7.test('aaaaaaaa'))    // true
+        console.log(reg7.test('ba'))          //output : true
+
+        let reg8 = /a*/
+        console.log(reg8.test(''))             // true
+        console.log(reg8.test('aaaaaaaa'))     // true
+
+        let reg9 = /a?/
+        console.log(reg9.test(''))             // true
+        console.log(reg9.test('a'))            // true
+
+        let reg10 = /a{3}/
+        console.log(reg10.test('aaa'))         // true
+        console.log(reg10.test('aa'))          // false
+
+        let reg11 = /a{2,4}/
+        console.log(reg11.test('aa'))          // true
+        console.log(reg11.test('aaaaa'))       // false
+
+        let reg12 = /a{3,}/
+        console.log(reg12.test('aaa'))         // true
+        console.log(reg12.test('aaaaaa'))      // true
+        console.log(reg12.test('aa'))          // false
+
+        let reg13 = /colou?r/
+        console.log(reg13.test('color'))       // true
+        console.log(reg13.test('colou'))      // output : false
+        console.log(reg13.test('colour'))      // true
+
+        
+        /*
+        Meta characters in Regular Expressions
+        -----------------------------------------
+        ^         → Matches the beginning of input
+                    Example: ^a  => matches a at the beginning of input
+        $         → Matches the end of input
+                    Example: a$  => matches a at the end of input
+        .         → Matches any one character except newline(\n)
+                    Example: a.b => matches a followed by any one character followed by b
+        \d        → Matches any digit. Equivalent to [0-9]
+                    Example: \d  => matches 0, 1, 2 ... 9
+        \D        → Matches any non-digit. Equivalent to [^0-9]
+                    Example: \D  => matches any character except 0, 1, 2 ... 9
+        \w        → Matches any alphanumeric character including underscore(_). Equivalent to [a-z
+                    Example: \w  => matches a, b ... z, A, B ... Z, 0, 1 ... 9 and _
+        \W        → Matches any non-alphanumeric character. Equivalent to [^a-zA
+                    Example: \W  => matches any character except a, b ... z, A, B ... Z, 0, 1 ... 9 and _
+        \s        → Matches any whitespace character including space, tab, form feed, etc.
+                    Example: \s  => matches space, tab, form feed, etc.
+        \S        → Matches any non-whitespace character
+                    Example: \S  => matches any character except space, tab, form feed, etc.
+        -----------------------------------------
+        */
+
+        let reg14 = /^a/
+        console.log(reg14.test('abc'))         // true
+
+        let reg15 = /a$/
+        console.log(reg15.test('cba'))         // true
+
+        let reg16 = /a.b/  
+        console.log(reg16.test('ab'))          // false
+
+        let reg17 = /a.b/    
+        console.log(reg17.test('aXb'))         // true
+
+        let reg18 = /\d/      //  -- > [0-9]
+        console.log(reg18.test('5'))           // true
+        console.log(reg18.test('a'))           // false
+
+        let reg19 = /\D/     //  -- > [^0-9]
+        console.log(reg19.test('5'))           // false
+        console.log(reg19.test('a'))           // true
+
+        let reg21 = /\w/    //  -- > [a-zA-Z0-9_]
+        console.log(reg21.test('a'))           // true
+        console.log(reg21.test('_5'))          // true
+        console.log(reg21.test('#'))           // false
+
+        let reg20 = /\W/    //  -- > [^a-zA-Z0-9_]
+        console.log(reg20.test('a'))           // false
+        console.log(reg20.test('_5'))           // false
+        console.log(reg20.test('#'))           // true
+
+        let reg22 = /\s/   //  -- > [ \t\r\n\f]
+        console.log(reg22.test(' '))           // true
+        console.log(reg22.test('\t'))          // true
+        console.log(reg22.test('a'))           // false
+
+        let reg23 = /\S/  //  -- > [^ \t\r\n\f]
+        console.log(reg23.test(' '))           // false
+        console.log(reg23.test('\t'))          // false
+        console.log(reg23.test('a'))           // true
+        console.log(reg23.test('hello have a nice day')) // true 
+
+    </script>
+</body>
+</html>
