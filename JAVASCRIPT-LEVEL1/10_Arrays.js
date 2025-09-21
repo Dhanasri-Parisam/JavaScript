@@ -27,6 +27,27 @@ console.log(Array); // ["superman", "batman", "spiderman", "ironman"]
 Array.splice(1, 2, "captain america", "black widow");
 console.log(Array); // ["superman", "captain america", "black widow", "spiderman", "ironman"]
 
+// sorting not working for numbers as expected
+// because by default, the sort() method sorts elements as strings.('5' is greater than '25')
+// To sort numbers correctly, you need to provide a compare function.
+
+let arr = [10, 2, 33, 4, 25];
+arr.sort((a,b) =>{
+    if(a > b) return 1; // if a is greater than b, return positive value
+    if(a < b) return -1; // if a is less than b, return negative value
+    return 0; // if a is equal to b, return 0
+});
+
+console.log(arr); // [2, 4, 10, 25, 33]
+
+// simpler way to sort numbers
+// Ascending order
+
+let numArray = [10, 2, 33, 4, 25];
+numArray.sort((a, b) => a - b);
+console.log(numArray); // [2, 4, 10, 25, 33]
+
+
 Array.sort();
 console.log(Array); // ["batman", "black widow", "captain america", "ironman", "spiderman", "superman"]
 

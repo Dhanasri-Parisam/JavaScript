@@ -10,3 +10,15 @@ console.log(jsonObject.age);  // 25
 const jsObject = { name: 'Bob', age: 30 };
 const jsString = JSON.stringify(jsObject);
 console.log(jsString); // '{"name":"Bob","age":30}'
+
+
+// Tricky interview Question on object => (. vs [])
+const obj = { name: 'Charlie', age: 35 };
+console.log(obj.name); // Charlie
+console.log(obj['age']); // 35
+// console.log(obj.'name'); // SyntaxError: Unexpected string --- IGNORE ---
+// console.log(obj.[age]); // SyntaxError: Unexpected token '.' --- IGNORE ---
+console.log(obj['name']); // Charlie
+// console.log(obj.[ 'age' ]); // SyntaxError: Unexpected token '.' --- IGNORE ---  
+
+
