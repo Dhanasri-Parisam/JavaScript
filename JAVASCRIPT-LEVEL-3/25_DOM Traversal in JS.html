@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Traversal in JS</title>
+</head>
+<body>
+    <div class="d1"> 
+        <h1>this is heading</h1>
+        <h2>this is subheading</h2>
+    </div>
+    <div class="d2">
+        <p>This is paragraph1</p>
+        <p>This is paragraph2</p>
+    </div>
+
+    <script>
+        let p = document.querySelector('p');
+        console.log(p); // output: <p>This is paragraph1</p>
+
+        // parentNode
+        console.log(p.parentNode); // output: <div class="d2">...</div>
+        console.log(p.parentNode.parentNode); // output: <body>...</body>
+        console.log(p.parentNode.parentNode.parentNode); // output: <html>...</html>
+        console.log(p.parentNode.parentNode.parentNode.parentNode); // output: #document
+        console.log(p.parentNode.parentNode.parentNode.parentNode.parentNode); // output: null
+
+        // childNodes
+        let d1 = document.querySelector('.d1');
+        console.log(d1.childNodes); // output: NodeList(5) [text, h1, text, h2, text]
+        console.log(d1.childNodes[0]); // output: #text
+        console.log(d1.childNodes[1]); // output: <h1>this is heading</h1>
+        console.log(d1.childNodes[1].childNodes[0]); // output: #
+
+        // children
+        console.log(d1.children); // output: HTMLCollection(2) [h1,h2]
+        console.log(d1.children[0]); // output: <h1>this is heading</h1>
+        console.log(d1.children[0].children); // output: HTMLCollection []
+
+        // firstChild
+        console.log(d1.firstChild); // output: #text
+        console.log(d1.firstChild.firstChild); // output: null
+
+        // firstElementChild
+        console.log(d1.firstElementChild); // output: <h1>this is heading
+        console.log(d1.firstElementChild.firstElementChild); // output: null
+
+        // lastChild
+        console.log(d1.lastChild); // output: #text
+        console.log(d1.lastChild.lastChild); // output: null
+
+        // lastElementChild
+        console.log(d1.lastElementChild); // output: <h2>this is sub
+        console.log(d1.lastElementChild.lastElementChild); // output: null
+
+        // nextSibling
+        console.log(d1.nextSibling); // output: #text
+
+        // prevsiousSibling
+        console.log(d1.previousSibling); // output: #text
+        console.log(d1.previousSibling.previousSibling); // output: null
+
+        // nextElementSibling
+        console.log(d1.nextElementSibling); // output: <div class="d2">
+        console.log(d1.nextElementSibling.nextElementSibling); // output: null
+    </script>
+</body>
+</html>
