@@ -45,20 +45,32 @@
     // ---------------------------
     // Example 3: Await with setTimeout (simulating delay)
     // ---------------------------
+    // A helper function that creates a delay
     function delay(ms) {
+      // Return a Promise that resolves after "ms" milliseconds
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     async function example3() {
       console.log("Example 3: Start");
-      await delay(2000); // waits for 2 seconds
+      // Printed immediately when function runs
+
+      // "await" pauses here until delay(2000) is resolved (after 2 seconds)
+      await delay(2000);
+
       console.log("Example 3: After 2 seconds delay");
+      // This line runs only after the Promise is resolved (2 seconds later)
     }
+
+    // Call the async function
     example3();
-    // Output:
-    // Example 3: Start
-    // (2 seconds later...)
-    // Example 3: After 2 seconds delay
+
+    /* 
+    🟢 Output Timeline:
+    1. Immediately -> "Example 3: Start"
+    2. JS waits for 2 seconds (because of await delay(2000))
+    3. After 2 seconds -> "Example 3: After 2 seconds delay"
+    */
 
 
     // ---------------------------
