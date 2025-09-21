@@ -93,19 +93,44 @@ function shuffleArray(array) {
 let shuffledArray = shuffleArray(nums);
 console.log(shuffledArray); // Random output every time
 
-
 // -----------------------------------------------
-// Getting Unique Values from an Array
-// -----------------------------------------------
-// - Using Set (removes duplicates automatically)
-
 let duplicateArr = [1, 2, 3, 2, 4, 1, 5, 3];
 let uniqueArr = [...new Set(duplicateArr)];
 console.log(uniqueArr); // [1, 2, 3, 4, 5]
 
-// Alternative: filter() + indexOf()
-let uniqueArr2 = duplicateArr.filter((item, index) => duplicateArr.indexOf(item) === index);
-console.log(uniqueArr2); // [1, 2, 3, 4, 5]
+// filter array of objects based on unique property
+let objArray = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+    { id: 1, name: "Alice" },
+    { id: 3, name: "Charlie" }
+];
+
+for(arr of objArray) {
+    console.log(arr.id);
+}
+// output:
+// 1
+// 2
+// 1
+// 3
+
+let empty = []
+for(item of objArray){
+    if(item.id === 1){
+        empty.push(item)
+    }
+}
+
+console.log(empty); // [ { id: 1, name: 'Alice' }, { id: 1, name: 'Alice' } ]
+
+// find the products > 10 and products < 100  using filter
+let products = [12, 5, 8, 130, 44, 99, 150, 200];
+let filteredProducts = products.filter(product => product > 10 && product < 100);
+console.log(filteredProducts); // [ 12, 44, 99 ] 
+
+let filteredProducts1 = products.filter(product => product > 200);
+console.log(filteredProducts1); // []
 
 // -----------------------------------------------
 //  Summary Notes:
@@ -115,5 +140,5 @@ console.log(uniqueArr2); // [1, 2, 3, 4, 5]
 // - filter() → Get ALL elements matching condition
 // - sort(Math.random()) → Quick shuffle (not reliable)
 // - Fisher-Yates → Best shuffle (uniform distribution)
-// - Set → Get unique values easily
+// - filter array of objects
 // -----------------------------------------------
