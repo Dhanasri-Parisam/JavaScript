@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Context Menu</title>
+  <style>
+    .context-menu {
+      border: 2px solid #ccc;
+      list-style: none;
+      width: 150px;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      background: white;
+      display: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .context-menu li {
+      padding: 10px;
+      cursor: pointer;
+    }
+    .context-menu li:hover {
+      background: #eee;
+    }
+  </style>
+</head>
+<body>
+  <h1>Right Click Anywhere</h1>
+
+  <ul class="context-menu" id="context-menu">
+    <li onclick="location.reload();">Refresh</li>
+    <li onclick="alert('Go to settings');">Settings</li>
+    <li onclick="alert('Inspect option clicked');">Inspect</li>
+    <li onclick="alert('Help option clicked');">Help</li>
+  </ul>
+
+  <script>
+    const cmenu = document.getElementById("context-menu");
+
+    // Show custom context menu on right-click
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault(); // stop default menu
+      cmenu.style.display = "block";
+      cmenu.style.left = e.clientX + "px";
+      cmenu.style.top = e.clientY + "px";
+    });
+
+    // Hide menu on left click
+    document.addEventListener("click", function () {
+      cmenu.style.display = "none";
+    });
+  </script>
+</body>
+</html>
