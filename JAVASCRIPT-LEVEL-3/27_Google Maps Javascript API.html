@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geolocation with Google Maps API</title>
+  <!--  Load Google Maps JavaScript API -->
+  <!-- Replace `YOUR_API_KEY` with your actual API key from Google Cloud Console -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+
+  <style>
+    #map {
+      height: 500px; /* Map height */
+      width: 100%;   /* Map takes full width */
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📍 Your Current Location on Google Maps</h2>
+  <div id="map"></div>
+
+  <script>
+    // ---------------------------
+    // Step 1: Check if Geolocation is supported
+    // ---------------------------
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+
+    // ---------------------------
+    // Step 2: Success Callback → Show location on Google Map
+    // ---------------------------
+    function showPosition(position) {
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+
+      // Create LatLng object
+      let userLocation = { lat: lat, lng: lon };
+
+      // Create Map centered on user's location
+      let map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,           // Zoom level (1 = world, 20 = building)
+        center: userLocation
+      });
+
+      // Place a Marker on user's location
+      let marker = new google.maps.Marker({
+        position: userLocation,
+        map: map,
+        title: "You are here 📍"
+      });
+
+      // Info Window (Popup when clicking marker)
+      let infoWindow = new google.maps.InfoWindow({
+        content: `<h3>Your Location</h3><p>Latitude: ${lat}<br>Longitude: ${lon}</p>`
+      });
+
+      marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+      });
+    }
+
+    // ---------------------------
+    // Step 3: Error Callback → Handle geolocation errors
+    // ---------------------------
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          alert(" User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert(" Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert(" The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert(" An unknown error occurred.");
+          break;
+      }
+    }
+  </script>
+</body>
+</html>

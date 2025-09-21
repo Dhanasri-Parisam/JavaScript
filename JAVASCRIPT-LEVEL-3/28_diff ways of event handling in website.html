@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Different Ways of Event Handling in JS</title>
+</head>
+<body>
+    <!-- Button with id and class -->
+    <button id="btn" class="stop">click me</button>
+    <!-- Input box to test input-related events -->
+    <input type="text" class="inputBox" placeholder="Type something and press Enter">
+
+    <script>
+        // ---------------------------
+        // 1. Inline Event Handling (via HTML attribute)
+        // ---------------------------
+        // Instead of writing <button onclick="test()"> in HTML,
+        // we can also use setAttribute in JS to assign inline event
+        document.getElementById("btn").setAttribute("onclick", "test()");
+
+        function test() {
+            alert("Button clicked - Event handled using HTML attribute");
+        }
+
+        // ---------------------------
+        // 2. Using DOM Property (element.onclick)
+        // ---------------------------
+        // Create a new button dynamically
+        const btn2 = document.createElement("button");
+        btn2.innerText = "Click me too";
+        document.body.appendChild(btn2);
+
+        // Assign event using property "onclick"
+        btn2.onclick = function () {
+            alert("Button clicked - Event handled using DOM property");
+        };
+
+        // ---------------------------
+        // 3. Using addEventListener (most recommended way)
+        // ---------------------------
+        const btn3 = document.createElement("button");
+        btn3.innerText = "Click me three";
+        document.body.appendChild(btn3);
+
+        // Using addEventListener (can attach multiple events to same element)
+        btn3.addEventListener("click", example3);
+
+        function example3() {
+            alert("Button clicked - Event handled using addEventListener");
+        }
+
+        // ---------------------------
+        // 4. Async Event Handling Example (fetch with async/await)
+        // ---------------------------
+        async function example4() {
+            console.log("Example 4: Inside async function");
+            try {
+                // Try to fetch a local text file (01_test.txt must exist in same folder)
+                const response = await fetch('01_test.txt');
+                const data = await response.text();
+
+                console.log("Example 4: After fetch");
+                console.log("Example 4: File content ->", data);
+            } catch (error) {
+                console.error("Example 4: Error fetching file:", error);
+            }
+        }
+
+        example4();
+
+        // This will run immediately (because fetch is async and non-blocking)
+        console.log("Example 4: Hello (printed first because fetch is async)");
+
+        // Expected output order:
+        // 1. Example 4: Inside async function
+        // 2. Example 4: Hello (doesn’t wait for fetch)
+        // 3. Example 4: After fetch (when Promise resolves)
+        // 4. Example 4: File content -> (contents of 01_test.txt)
+
+
+        // ---------------------------
+        // 5. Handling event on Input box
+        // ---------------------------
+        let ip = document.getElementsByClassName("inputBox")[0];
+        ip.onclick = function () {
+            console.log("Input box clicked - Event handled using DOM property");
+        };
+
+        // ---------------------------
+        // 6. Removing Event Listeners
+        // ---------------------------
+        let btn5 = document.getElementById("btn");
+        let stop = document.getElementsByClassName("stop")[0];
+
+        function example5() {
+            alert("Button clicked - Event handled using addEventListener (will be removed)");
+        }
+
+        // Attach event listener to first button
+        btn5.addEventListener("click", example5);
+
+        // Function to remove event listener (on clicking stop button)
+        function remove() {
+            // This removes onclick assigned via property
+            btn5.onclick = null;
+
+            // If you want to remove addEventListener, use:
+            // btn5.removeEventListener("click", example5);
+
+            alert("Event listener removed. Clicking the first button will no longer trigger the alert.");
+        }
+
+        // Attach remove() function to stop button
+        stop.addEventListener("click", remove);
+
+        // NOTE:
+        // - onclick = null removes only property-based event
+        // - removeEventListener removes addEventListener-based events
+    </script>
+</body>
+</html>
