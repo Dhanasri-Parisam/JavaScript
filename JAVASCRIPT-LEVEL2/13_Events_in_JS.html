@@ -178,6 +178,18 @@
       document.body.style.backgroundColor = color;
     };
 
+    // apply toggile event
+    let isBlue = false;
+    btn1.addEventListener("click", function () {
+      if (isBlue) {
+        document.body.style.backgroundColor = "white";
+      } else {
+        document.body.style.backgroundColor = "blue";
+      }
+      isBlue = !isBlue; // toggle
+    });
+    
+
     /***********************************************************
      * 📝 SUMMARY
      * ---------------------------------------------------------
