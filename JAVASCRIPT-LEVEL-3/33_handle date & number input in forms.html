@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handle date & number input in forms</title>
+</head>
+<body>
+    <input type="text" id="dateInput" placeholder="Enter date (YYYY-MM-DD)">
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <button id="submitBtn">Submit</button>
+
+    <script>
+        let data = document.getElementById("dateInput");
+        let num = document.getElementById("numberInput");
+        let btn = document.getElementById("submitBtn");
+
+        num.value;  // e.g., "42"
+        num.valueAsNumber; // e.g., 42
+        number(num.value); // e.g., 42
+        parseInt(num.value); // e.g., 42
+
+        data.value; // e.g., "2023-10-05"
+        data.valueAsDate; // e.g., Date object representing 2023-10-
+        data.valueAsNumber; // e.g., milliseconds since epoch
+        new Date(data.value); // e.g., Date object representing 2023-10-05
+
+    </script>
+</body>
+</html>
