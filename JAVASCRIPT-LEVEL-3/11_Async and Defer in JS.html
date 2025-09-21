@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Async Await in JS</title>
+</head>
+<body>
+  <script>
+    // ==================================================
+    // 📌 Async & Await in JavaScript
+    // ==================================================
+    // async:
+    // - Declares a function as asynchronous.
+    // - Always returns a Promise.
+    // - If a value is returned, it’s wrapped in Promise.resolve(value).
+    //
+    // await:
+    // - Pauses execution inside async until Promise settles.
+    // - Can only be used inside async functions.
+    // - If Promise resolves → returns the value.
+    // - If Promise rejects → throws error (handle with try...catch).
+
+    // ==================================================
+    // Example 1: Async returns a Promise automatically
+    // ==================================================
+    async function example1() {
+      return 100; // Same as: return Promise.resolve(100);
+    }
+
+    example1().then(res => console.log("Example 1:", res));
+    // Output: Example 1: 100
+
+
+    // ==================================================
+    // Example 2: Await with a Promise
+    // ==================================================
+    async function example2() {
+      let result = await Promise.resolve("Hello from Await");
+      console.log("Example 2:", result);
+    }
+
+    example2();
+    // Output: Example 2: Hello from Await
+
+
+    // ==================================================
+    // Example 3: Await with setTimeout (delay simulation)
+    // ==================================================
+    function delay(ms) {
+      // Returns a Promise that resolves after "ms" milliseconds
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function example3() {
+      console.log("Example 3: Start");
+      await delay(2000); // Waits 2 seconds before next line
+      console.log("Example 3: After 2 seconds delay");
+    }
+
+    example3();
+    // Output:
+    // Example 3: Start
+    // (2 seconds later...)
+    // Example 3: After 2 seconds delay
+
+
+    // ==================================================
+    // Example 4: Using fetch with async/await
+    // ==================================================
+    async function example4() {
+      console.log("Example 4: Inside async function");
+      try {
+        // Fetch data (returns a Promise)
+        const res = await fetch('01_test.txt'); 
+        console.log("Example 4: After fetch (waiting for response)");
+
+        // Convert response to text
+        const data = await res.text(); 
+        console.log("Example 4: File content ->", data);
+
+      } catch (error) {
+        // Handle fetch or network error
+        console.error("Example 4: Fetch error ->", error);
+      }
+    }
+
+    example4();
+
+    // This line executes immediately (not waiting for fetch)
+    console.log("Example 4: Hello (printed first because fetch is async)");
+
+    // Output order (if file exists):
+    // Example 4: Inside async function
+    // Example 4: Hello (because JS doesn’t wait)
+    // Example 4: After fetch (when Promise resolves)
+    // Example 4: File content -> (contents of 01_test.txt)
+  </script>
+</body>
+</html>
