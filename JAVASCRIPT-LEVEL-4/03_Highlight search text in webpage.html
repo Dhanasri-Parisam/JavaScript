@@ -29,9 +29,9 @@
                 paraEle.innerHTML = originalText;
             }
             else{
-                let words = input.split(/\s+/);
-                let p1 = words.join("|");
-                let pattern = new RegExp(p1, "gi");
+                let words = input.split(/\s+/);  // split by spaces
+                let p1 = words.join("|");   // regex or operator : how many words
+                let pattern = new RegExp(p1, "gi"); //global, i-insensitive
                 let modified = originalText.replace(pattern, (match) => {
                     return `<span class='highlight'>${match}</span>`;
                 });
