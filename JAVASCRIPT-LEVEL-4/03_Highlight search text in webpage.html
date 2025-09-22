@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlight search text in the webpage</title>
+    <style>
+        .highlight{
+            background-color: yellow;
+            border: 1px solid black;
+            font-weight: bold;
+            color: black;
+            padding: 2px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="search" placeholder="Search text..." oninput="HighlightText()">
+    <p id="para">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti, voluptas. Iste minus libero eos illo repellendus earum blanditiis fuga eum, laborum voluptas. Aliquid cupiditate, recusandae non enim omnis quam illum!</p>
+    <script>
+        let paraEle = document.getElementById("para");
+        let searchInput = document.getElementById("search");
+        let originalText = paraEle.textContent; // reference
+
+        function HighlightText(){
+            let input = searchInput.value.trim(); // for spaces
+            if(input == ""){
+                paraEle.innerHTML = originalText;
+            }
+            else{
+                let words = input.split(/\s+/);
+                let p1 = words.join("|");
+                let pattern = new RegExp(p1, "gi");
+                let modified = originalText.replace(pattern, (match) => {
+                    return `<span class='highlight'>${match}</span>`;
+                });
+                paraEle.innerHTML = modified;
+            }
+        }
+    </script>
+</body>
+</html>

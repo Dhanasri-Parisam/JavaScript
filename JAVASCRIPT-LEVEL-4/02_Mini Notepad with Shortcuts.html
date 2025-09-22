@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Keyboard Shortcuts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        .search {
+            display: none;
+            margin-bottom: 20px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        .help {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Mini Notepad (with Shortcuts)</h1>
+
+    <textarea id="editor" placeholder="Start typing..."></textarea>
+    <br>
+    <input type="search" class="search" placeholder="Search here...">
+
+    <div class="help" id="helpBox">
+        <h3>Available Shortcuts</h3>
+        <ul>
+            <li><b>Ctrl + F</b> → Open Search</li>
+            <li><b>Ctrl + S</b> → Save Content</li>
+            <li><b>Ctrl + C</b> → Clear Editor</li>
+            <li><b>Ctrl + H</b> → Show/Hide Help</li>
+        </ul>
+    </div>
+
+    <script>
+        let editor = document.getElementById("editor");
+        let searchEle = document.querySelector(".search");
+        let helpBox = document.getElementById("helpBox");
+
+        document.addEventListener("keydown", function (e) {
+            console.log(e.key, e.ctrlKey);
+
+            // Ctrl + F → Show search box
+            if (e.key === "f" && e.ctrlKey) {
+                e.preventDefault();  // what happens preventDefault() is not called? -> The browser's default search function opens.
+                searchEle.style.display = "block";
+                searchEle.focus(); // Focus on the search box when opened
+            }
+
+            // Ctrl + S → Mock Save
+            if (e.key === "s" && e.ctrlKey) {
+                e.preventDefault();  // what happens preventDefault() is not called? -> The browser tries to save the webpage. it may open a save dialog or do nothing depending on the browser.
+                alert("Content Saved: " + editor.value);
+            }
+
+            // Ctrl + C → Clear editor
+            if (e.key === "c" && e.ctrlKey) {
+                e.preventDefault();
+                editor.value = ""; 
+                alert("Editor cleared!");
+            }
+
+            // Ctrl + H → Toggle Help
+            // What happens when Ctrl + H is pressed? -> Toggle the visibility of the help box and prevent the default browser action. 
+            if (e.key === "h" && e.ctrlKey) {
+                e.preventDefault();
+                if (helpBox.style.display === "block") {
+                    helpBox.style.display = "none";
+                } else {
+                    helpBox.style.display = "block";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
