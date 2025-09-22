@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipboard Media Paste Demo</title>
+
+    <style>
+        /* Preview container styling */
+        #preview {
+            background-color: white;
+            border: 2px solid black;
+            min-height: 300px;          /* enough height to see pasted media */
+            width: 80%;                 /* responsive width */
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;            /* allow multiple media in rows */
+            gap: 10px;                  /* spacing between items */
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow: auto;             /* scrollbar if content overflows */
+        }
+
+        /* Styles applied to image, video, and audio previews */
+        #preview img,
+        #preview video,
+        #preview audio {
+            max-width: 200px;
+            max-height: 200px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Paste media file from clipboard</h1>
+    
+    <!-- Container to hold pasted media -->
+    <div id="preview"></div>
+
+    <script>
+        // Get reference to preview container
+        let previewEle = document.getElementById("preview");
+
+        // Listen for "paste" event on the preview element
+        previewEle.addEventListener("paste", (event) => {
+            
+            // Get all files from clipboard data
+            const files = event.clipboardData.files;
+
+            // Loop through all files copied in clipboard
+            for (let file of files) {
+                console.log(file); // Debug: logs file details in console
+
+                // Identify the file type (image, video, audio, etc.)
+                let type = file.type;
+
+                // Create a temporary URL to use as the media source
+                let url = URL.createObjectURL(file);
+
+                // If the file is an image → create <img>
+                if (type.startsWith('image')) {
+                    let img = document.createElement('img');
+                    img.src = url;       // set image source
+                    previewEle.append(img); // add to preview
+                } 
+                // If the file is a video → create <video>
+                else if (type.startsWith('video')) {
+                    let video = document.createElement('video');
+                    video.src = url;     
+                    video.controls = true; // enable play/pause controls
+                    previewEle.append(video);
+                } 
+                // Otherwise → assume audio → create <audio>
+                else {
+                    let audio = document.createElement('audio');
+                    audio.src = url;
+                    audio.controls = true; // enable play/pause controls
+                    previewEle.append(audio);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

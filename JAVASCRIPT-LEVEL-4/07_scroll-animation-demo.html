@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scroll animation</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .card{
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+
+            /* initial state */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .card.revealed{
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        button{
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>animations triggered when scrolling using Intersection Observer</h1>
+
+    <div class="card">
+        <h2>Courses</h2>
+        <p>Introduction to Python</p>
+        <ul>
+            <li>variables,datatypes,operators</li>
+            <li>control statements</li>
+            <li>functions</li>
+            <li>OOPs</li>
+            <li>modules</li>
+        </ul>
+
+        <button>Enroll Now</button>
+    </div>
+</body>
+</html>
