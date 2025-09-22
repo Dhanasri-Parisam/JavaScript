@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme changing application</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        .dark-theme{
+            --background-primary : #000;
+            --text-color: #fff;
+            --accent-color: #ff9800;
+            --background-secondary: #1e391e;
+            --border-color: #334155;
+        }
+
+        .light-theme{
+            --text-color: #000;
+            --background-primary : #fff;
+            --accent-color:#2563eb;
+            --background-secondary: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        body{
+            background: var(--background-primary);
+            color: var(--text-color);
+            text-align: center;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        input{
+            background-color: var(--background-secondary);
+            color: var(--text-color);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        button{
+            background: var(--accent-color);
+            color: #fff;
+            padding: 10px 20px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 18px;
+        }
+        .icon {
+            margin-right: 8px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Theme Changer</h1>
+    <button id="themeBtn" onclick="switchTheme()">
+        <i id="themeIcon" class="fa-solid fa-sun icon"></i>
+        Toggle Theme
+    </button>
+    <input type="text" placeholder="enter your name"><br>
+
+    <script>
+        let body = document.body;
+        let themeIcon = document.getElementById('themeIcon');
+
+        // Load saved theme on page load
+        if(localStorage.getItem("theme") === "dark") {
+            body.classList.add("dark-theme");
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            body.classList.add("light-theme");
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        function switchTheme(){
+            if(body.classList.contains('light-theme')){
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem("theme", "dark");
+            }
+            else{
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem("theme", "light");
+            }
+        }
+    </script>
+    <!-- Font Awesome reference: https://fontawesome.com/icons -->
+</body>
+</html>
